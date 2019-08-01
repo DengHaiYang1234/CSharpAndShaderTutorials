@@ -1,0 +1,4 @@
+sceneSetups:
+- path: "Assets/BasicsTransform/Matria\u8FC7\u591A\u4F18\u5316/Main.unity"
+  isLoaded: 1
+  isActive: 1
