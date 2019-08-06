@@ -6,7 +6,10 @@ using UnityEngine.SceneManagement;
 //Game流程控制类
 public class Game : PersistableObject
 {
+    public static Game Instance { get; private set; }
+
     [Header("序列化对象")]
+    [SerializeField]
     public ShapeFactory shapeFactory;
     [Header("序列化管理器")]
     public PersistentStorage storage;
@@ -14,6 +17,9 @@ public class Game : PersistableObject
     public float CreationSpeed { get; set; }
 
     public float DestructionSpeed { get; set; }
+
+    public SpawnZone spawnZoneOfLevel { get; set; }
+
 
 
 
@@ -38,6 +44,12 @@ public class Game : PersistableObject
     private float creationProgress, destructionProgress;
 
     private int loadedLevelBuildIndex;
+
+    //OnEnable在级别更改后也会被调用
+    private void OnEnable()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
@@ -110,10 +122,11 @@ public class Game : PersistableObject
         Shape instance = shapeFactory.GetRandom();
         Transform t = instance.transform;
         //返回半径为1的球体内的随机点
-        t.localPosition = Random.insideUnitSphere * 5f;
+        t.localPosition = spawnZoneOfLevel.SpawnPoint;
         //随机旋转值
         t.localRotation = Random.rotation;
         t.localScale = Vector3.one * Random.Range(0.1f, 1f);
+
         //改变颜色HSV
         //https://blog.csdn.net/zgjllf1011/article/details/79391241
         instance.SetColor(Random.ColorHSV(
