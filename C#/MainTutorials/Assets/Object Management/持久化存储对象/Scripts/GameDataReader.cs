@@ -7,7 +7,7 @@ public class GameDataReader : MonoBehaviour
 {
     BinaryReader reader;
 
-	public int Version{get;}
+	public int Version{get; private set; }
 
     public GameDataReader(BinaryReader reader, int version)
     {

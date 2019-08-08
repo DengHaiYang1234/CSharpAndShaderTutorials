@@ -6,6 +6,10 @@ using UnityEngine;
 //对各自的Obj的材质或颜色等操作类
 public class Shape : PersistableObject
 {
+    public Vector3 AngularVelocity { get; set; }
+
+    public Vector3 Velocity { get; set; }
+
     //默认不可以为0，所以找了个数代替
     int shapeId = int.MinValue;
 
@@ -24,6 +28,13 @@ public class Shape : PersistableObject
         meshRender = GetComponent<MeshRenderer>();
         //获取颜色标识符
         colorPropertyId = Shader.PropertyToID("_Color");
+    }
+
+    //这里不适用FixedUpdate的原因是，FixedUpdate和其他特殊的Unity方法需要额外的开销，这会降低速度。当只有几个活动形状时，这不是问题，但在处理许多形状时，这可能成为性能瓶颈。
+    public void GameUpdate()
+    {
+        transform.Rotate(AngularVelocity *Time.deltaTime);
+        transform.localPosition += Velocity*Time.deltaTime;
     }
 
     public int ShapeId
@@ -65,6 +76,8 @@ public class Shape : PersistableObject
     {
         base.Save(writer);
         writer.Write(color);
+        writer.Write(AngularVelocity);
+        writer.Write(Velocity);
     }
 
     //加载TransForm和颜色
@@ -72,6 +85,9 @@ public class Shape : PersistableObject
     {
         base.Load(reader);
         SetColor(reader.Version > 0 ? reader.ReadColor() : Color.white);
+        AngularVelocity = reader.Version >= 4 ? reader.ReadVector() : Vector3.zero;
+
+        Velocity = reader.Version >= 4 ? reader.ReadVector() : Vector3.zero;
     }
 
 
