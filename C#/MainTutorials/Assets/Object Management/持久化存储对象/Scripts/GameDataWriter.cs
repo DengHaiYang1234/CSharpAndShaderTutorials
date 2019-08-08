@@ -7,6 +7,12 @@ public class GameDataWriter
 {
     BinaryWriter write;
 
+    //用于保存随机数的完整内部状态的可序列化结构
+    public void Write(Random.State value)
+    {
+        write.Write(JsonUtility.ToJson(value));
+    }
+    
     public GameDataWriter(BinaryWriter write)
     {
         this.write = write;

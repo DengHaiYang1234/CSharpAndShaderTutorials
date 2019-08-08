@@ -20,9 +20,6 @@ public class Game : PersistableObject
 
     public SpawnZone spawnZoneOfLevel { get; set; }
 
-
-
-
     [Header("创建")]
     public KeyCode creatKey = KeyCode.C;
     [Header("清除")]
@@ -39,11 +36,13 @@ public class Game : PersistableObject
     List<Shape> shapes;
 
     //版本标记
-    const int saveVersion = 2;
+    const int saveVersion = 3;
 
     private float creationProgress, destructionProgress;
 
     private int loadedLevelBuildIndex;
+
+    Random.State mainRandomState;
 
     //OnEnable在级别更改后也会被调用
     private void OnEnable()
@@ -53,6 +52,8 @@ public class Game : PersistableObject
 
     void Start()
     {
+        mainRandomState = Random.state;
+
         shapes = new List<Shape>();
 
         if (Application.isEditor)
@@ -153,6 +154,12 @@ public class Game : PersistableObject
 
     void BeginNewGame()
     {
+        Random.state = mainRandomState;
+        //随机种子
+        int seed = Random.Range(0,int.MaxValue) ^ (int)Time.unscaledDeltaTime;
+        
+        Random.InitState(seed);
+
         for (var i = 0; i < shapes.Count; i++)
         {
             shapeFactory.Reclaim(shapes[i]);
@@ -181,6 +188,7 @@ public class Game : PersistableObject
     public override void Save(GameDataWriter writer)
     {
         writer.Write(shapes.Count);
+        writer.Write(Random.state);
         writer.Write(loadedLevelBuildIndex);
         for (int i = 0; i < shapes.Count; i++)
         {
@@ -200,6 +208,10 @@ public class Game : PersistableObject
         }
 
         int count = version <= 0 ? -version : reader.ReadInt();
+        if(saveVersion >= 3)
+        {
+            Random.state = reader.ReadRandomState();
+        }
         StartCoroutine(LoadLevel(version < 2 ? 1 : reader.ReadInt()));
 
         for (int i = 0; i < count; i++)
