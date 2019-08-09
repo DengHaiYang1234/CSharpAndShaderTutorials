@@ -3,6 +3,6 @@ sceneSetups:
   isLoaded: 1
   isActive: 1
 - path: "Assets/Object Management/\u6301\u4E45\u5316\u5B58\u50A8\u5BF9\u8C61/Scene/Level
-    3.unity"
+    2.unity"
   isLoaded: 1
   isActive: 0

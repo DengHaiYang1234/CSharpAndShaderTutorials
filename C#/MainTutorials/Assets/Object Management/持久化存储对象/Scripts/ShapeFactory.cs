@@ -8,8 +8,11 @@ using UnityEngine.SceneManagement;
 [CreateAssetMenu]
 public class ShapeFactory : ScriptableObject
 {
+
+
     [SerializeField]
     Shape[] prefabs;
+
     [SerializeField]
     Material[] materials;
 

@@ -43,8 +43,8 @@ public class Game : PersistableObject
     List<Shape> shapes;
 
     //每个版本代表不同的意思。比如4就是存储的旋转
-    const int saveVersion = 4;
-
+    const int saveVersion = 5;
+    
     //创建于销毁的控制条
     private float creationProgress, destructionProgress;
 
