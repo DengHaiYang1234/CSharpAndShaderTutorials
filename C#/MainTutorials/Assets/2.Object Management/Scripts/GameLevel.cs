@@ -17,9 +17,9 @@ public class GameLevel : PersistableObject
             persistentObjects = new PersistableObject[0];
     }
 
-    public Shape SpawnShape( )
+    public void SpawnShape( )
     {
-        return spawnZone.SpawnShape();
+        spawnZone.SpawnShapes();
     }
 
     public override void Load(GameDataReader reader)

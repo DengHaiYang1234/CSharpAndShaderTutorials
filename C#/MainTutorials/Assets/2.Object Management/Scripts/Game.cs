@@ -7,6 +7,7 @@ using UnityEngine.UI;
 //Game流程控制类
 public class Game : PersistableObject
 {
+    public static Game Instance { get; private set; }
 
     // [Header("序列化对象")]
     // [SerializeField]
@@ -80,6 +81,7 @@ public class Game : PersistableObject
 
     void OnEnable()
     {
+        Instance = this;
         if (shapeFactories[0].FactoryId != 0)
         {
             for (int i = 0; i < shapeFactories.Length; i++)
@@ -93,7 +95,7 @@ public class Game : PersistableObject
     void Update()
     {
         if (Input.GetKeyDown(creatKey))
-            CreatShape();
+            GameLevel.Current.SpawnShape();
         else if (Input.GetKeyDown(destoryKey))
             DestoryShape();
         else if (Input.GetKeyDown(beginKey))
@@ -137,7 +139,7 @@ public class Game : PersistableObject
         while (creationProgress >= 1f)
         {
             creationProgress -= 1f;
-            CreatShape();
+            GameLevel.Current.SpawnShape();
         }
 
         destructionProgress += Time.deltaTime * DestructionSpeed;
@@ -171,7 +173,7 @@ public class Game : PersistableObject
         //instance.Velocity = Random.onUnitSphere*Random.Range(0f,2f);
 
         //GameLevel.Current.ConfigureSpawn(instance);
-        shapes.Add(GameLevel.Current.SpawnShape());
+        //shapes.Add(GameLevel.Current.SpawnShape());
     }
 
     void DestoryShape()
@@ -285,7 +287,12 @@ public class Game : PersistableObject
             int materialId = version > 0 ? reader.ReadInt() : 0;
             Shape instance = shapeFactories[factoryId].Get(shapeId);
             instance.Load(reader);
-            shapes.Add(instance);
+            //shapes.Add(instance);
         }
+    }
+
+    public void AddShape(Shape shape)
+    {
+        shapes.Add(shape);
     }
 }
