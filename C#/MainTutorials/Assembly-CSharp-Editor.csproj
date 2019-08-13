@@ -46,7 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\2.Object Management\Scripts\Editor\FloatRangeDrawer.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\Editor\FloatOrIntRangeDrawer.cs" />
      <Compile Include="Assets\2.Object Management\Scripts\Editor\FloatRangeSliderDrawer.cs" />
      <None Include="Assets\Readme.txt" />
      <None Include="Assets\1.BasicsTransform\时钟\Readme.txt" />

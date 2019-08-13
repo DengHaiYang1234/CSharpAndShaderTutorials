@@ -2,12 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct ShapeInstance //检测Shape的唯一性
+{
+    public Shape Shape { get; private set; }
+    int instanceId;
+    int instanceIdOrSaveIndex;
+
+    public ShapeInstance(int saveIndex)
+    {
+        Shape = null;
+        instanceId = saveIndex;
+        instanceIdOrSaveIndex = 0;
+    }
+
+    public bool IsValid
+    {
+        get
+        {
+            return Shape && instanceId == Shape.InstanceId;
+        }
+    }
+
+    public void Resolve()
+    {
+        if (instanceIdOrSaveIndex >= 0)
+        {
+            Shape = Game.Instance.GetShape(instanceIdOrSaveIndex);
+            instanceIdOrSaveIndex = Shape.InstanceId;
+        }
+
+    }
+}
+
 
 //对各自的Obj的材质或颜色等操作类
 public class Shape : PersistableObject
 {
     [SerializeField]
     MeshRenderer[] meshRenders;
+    [SerializeField]
+
+
     ShapeFactory originFactory;
 
     //行为抽象集合
@@ -44,6 +79,9 @@ public class Shape : PersistableObject
     public int MaterialId { get; private set; }
     public float Age { get; private set; }
 
+    public int InstanceId { get; private set; }
+
+    public int SaveIndex { get; set; }
 
     MeshRenderer meshRender;
 
@@ -63,7 +101,12 @@ public class Shape : PersistableObject
         Age += Time.deltaTime;
         for (int i = 0; i < behaviorList.Count; i++)
         {
-            behaviorList[i].GameUpdate(this);
+
+            if (!behaviorList[i].GameUpdate(this))
+            {
+                behaviorList[i].Recycle();
+                behaviorList.RemoveAt(i--);
+            }
         }
     }
 
@@ -75,6 +118,16 @@ public class Shape : PersistableObject
         behaviorList.Add(behavior);
         return behavior;
     }
+    //explicit 关键字用于声明必须使用强制转换来调用的用户定义的类型转换运算符
+    public static implicit operator ShapeInstance(Shape shape)
+    {
+        return new ShapeInstance(shape.SaveIndex);
+    }
+
+    // public static implicit operator ShapeInstance(Shape shape)
+    // {
+    //     return new ShapeInstance(shape);
+    // }
 
     ShapeBehavior AddBehavior(ShapeBehaviorType type)
     {
@@ -195,6 +248,7 @@ public class Shape : PersistableObject
     public void Recycle()
     {
         Age = 0f;
+        InstanceId += 1;
         for (int i = 0; i < behaviorList.Count; i++)
         {
             behaviorList[i].Recycle();
@@ -227,5 +281,29 @@ public class Shape : PersistableObject
         }
     }
 
+    public void ResolveShapeInstances()
+    {
+        for (int i = 0; i < behaviorList.Count; i++)
+        {
+            behaviorList[i].ResolveShapeInstances();
+        }
+    }
 
+    public void Die()
+    {
+        Game.Instance.Kill(this);
+    }
+
+    public void MarkAsDying()
+    {
+        Game.Instance.MarkAsDying(this);
+    }
+
+    public bool IsMarkAsDying
+    {
+        get
+        {
+            return Game.Instance.IsMarkedAsDying(this);
+        }
+    }
 }

@@ -12,7 +12,7 @@ public class GameDataWriter
     {
         write.Write(JsonUtility.ToJson(value));
     }
-    
+
     public GameDataWriter(BinaryWriter write)
     {
         this.write = write;
@@ -49,6 +49,11 @@ public class GameDataWriter
         write.Write(color.g);
         write.Write(color.b);
         write.Write(color.a);
+    }
+
+    public void Write(ShapeInstance value)
+    {
+        write.Write(value.IsValid ? value.Shape.SaveIndex : -1);
     }
 
 }
