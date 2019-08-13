@@ -121,7 +121,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\2.Object Management\Scripts\Editor\FloatRangeDrawer.cs" />
+    <Compile Include="Assets\2.Object Management\Scripts\Editor\FloatOrIntRangeDrawer.cs" />
     <Compile Include="Assets\2.Object Management\Scripts\Editor\FloatRangeSliderDrawer.cs" />
   </ItemGroup>
   <ItemGroup>

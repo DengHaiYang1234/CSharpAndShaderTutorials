@@ -2,6 +2,7 @@
 
 public sealed class MovementShapeBehavior : ShapeBehavior 
 {
+    //速度
 	public Vector3 Velocity{get;set;}
 
 	public override ShapeBehaviorType BehaviorType

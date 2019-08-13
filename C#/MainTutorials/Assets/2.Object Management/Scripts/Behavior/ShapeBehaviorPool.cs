@@ -23,6 +23,7 @@ public static class ShapeBehaviorPool<T> where T : ShapeBehavior, new()
 #endif
     }
 
+    //回收
     public static void Reclaim(T behavior)
     {
 #if UNITY_EDITOR

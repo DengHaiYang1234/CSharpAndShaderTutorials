@@ -170,11 +170,13 @@ public class Game : PersistableObject
         {
             for (int i = 0; i < killList.Count; i++)
             {
+                Debug.Log("IsValid:" + killList[i].IsValid);
+                Debug.Log("name:" + killList[i].Shape.name);
+                Debug.Log("====================================:");
                 if (killList[i].IsValid)
                 {
                     KillImmediately(killList[i].Shape);
                 }
-
             }
 
             killList.Clear();
@@ -206,8 +208,6 @@ public class Game : PersistableObject
             {
                 shape.AddBehavior<DyingShapeBehavior>().Initialize(shape,destoryDuration);
             }
-
-            // KillImmediately(shape);
         }
     }
 
@@ -332,17 +332,17 @@ public class Game : PersistableObject
 
     public void Kill(Shape shape)
     {
-        if (inGameUpdateLoop)
+        if (inGameUpdateLoop) //多当前正在处理循环,那么先添加至list，后一帧在执行
             killList.Add(shape);
         else
-            KillImmediately(shape);
+            KillImmediately(shape);//立即处理
     }
 
     void KillImmediately(Shape shape)
     {
         int index = shape.SaveIndex;
+        //回收obj
         shape.Recycle();
-
         if (index < dyingShapeCount && index < --dyingShapeCount)
         {
             shapes[dyingShapeCount].SaveIndex = index;
@@ -361,9 +361,12 @@ public class Game : PersistableObject
 
         shapes.RemoveAt(lastIndex);
     }
+
     
     void MarkAsDyingImmediately(Shape shape)
     {
+        //index与dyingShapeCount发生互换，互换之后shapes[index].SaveIndex = index；shapes[dyingShapeCount].SaveIndex = dyingShapeCount;
+        //最后相当于排序，前面的是死亡的，后面的是正常的
         int index = shape.SaveIndex;
         if (index < dyingShapeCount)
             return;
@@ -373,6 +376,7 @@ public class Game : PersistableObject
         shapes[dyingShapeCount++] = shape;
     }
 
+    //下一帧标记
     public void MarkAsDying(Shape shape)
     {
         if (inGameUpdateLoop)

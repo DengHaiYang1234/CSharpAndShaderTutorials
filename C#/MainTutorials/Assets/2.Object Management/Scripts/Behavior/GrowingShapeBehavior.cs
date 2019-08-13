@@ -10,6 +10,7 @@ public class GrowingShapeBehavior : ShapeBehavior
 	{
 		originalScale = shape.transform.localScale;
 		this.duration = duration;
+        //定格记录开始生成的节点
 		dyingAge = shape.Age;
 	}
 
@@ -28,15 +29,18 @@ public class GrowingShapeBehavior : ShapeBehavior
 	
     public override bool GameUpdate(Shape shape)
     {
-		float dyingDuration = shape.Age - dyingAge;
+        //差值，越来越大
+        float dyingDuration = shape.Age - dyingAge;
+
+        //在规定的生成时间内，obj还没有完全Init
 		if(dyingDuration < duration)
 		{
 			float s = 1 - dyingDuration / duration;
 			s = (3f - 2f * s) * s *s;
-			shape.transform.localScale =s * originalScale;
+			shape.transform.localScale = s * originalScale;
 			return true;
 		}
-
+        //???只要在规定的生成时间生成好了，那么就置0
 		shape.transform.localScale = Vector3.zero;
         return false;
     }

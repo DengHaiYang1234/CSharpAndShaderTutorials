@@ -12,14 +12,24 @@ public class SatelliteShapeBehavior : ShapeBehavior
 
     Vector3 previousPosition;
 
+    /// <summary>
+    /// Satellite初始化
+    /// </summary>
+    /// <param name="shape"> 当前Obj </param>
+    /// <param name="focalShape"> 目标obj </param>
+    /// <param name="radius"> 旋转半径 </param>
+    /// <param name="frequency"> 频率 </param>
     public void Initialize(Shape shape, Shape focalShape, float radius, float frequency)
     {
         this.focalShape = focalShape;
         this.frequency = frequency;
 
+        //确定旋转轨道轴
         Vector3 orbitAxis = Random.onUnitSphere;
+
         do
         {
+            
             cosOffset = Vector3.Cross(orbitAxis, Random.onUnitSphere).normalized;
         }
         while (cosOffset.sqrMagnitude < 0.1f);
@@ -29,7 +39,7 @@ public class SatelliteShapeBehavior : ShapeBehavior
 
         shape.AddBehavior<RotationShapeBehavior>().AngularVelocity =
             -360f * frequency *
-            shape.transform.InverseTransformDirection(orbitAxis);
+            shape.transform.InverseTransformDirection(orbitAxis); //将世界空间的方向转换为局部空间
 
         GameUpdate(shape);
         previousPosition = shape.transform.localPosition;
@@ -57,7 +67,6 @@ public class SatelliteShapeBehavior : ShapeBehavior
         }
 
         shape.AddBehavior<MovementShapeBehavior>().Velocity = (shape.transform.localPosition - previousPosition) / Time.deltaTime;
-
         return false;
     }
 

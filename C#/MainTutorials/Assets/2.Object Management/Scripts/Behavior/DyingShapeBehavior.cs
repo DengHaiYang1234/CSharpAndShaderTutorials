@@ -35,7 +35,7 @@ public class DyingShapeBehavior : ShapeBehavior
 		{
 			float s = 1 - dyingDuration / duration;
 			s = (3f - 2f * s) * s *s;
-			shape.transform.localScale =s * originalScale;
+			shape.transform.localScale = s * originalScale;
 			return true;
 		}
 

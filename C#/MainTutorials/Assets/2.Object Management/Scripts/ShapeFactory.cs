@@ -86,7 +86,7 @@ public class ShapeFactory : ScriptableObject
             Random.Range(0, materials.Length));
     }
 
-    //回收
+    //取回
     public void Reclaim(Shape shapeToRecycle)
     {
         if(shapeToRecycle.OriginFactory != this)
