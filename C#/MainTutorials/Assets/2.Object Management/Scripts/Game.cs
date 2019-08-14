@@ -52,7 +52,7 @@ public class Game : PersistableObject
     List<ShapeInstance> killList, markAsDyingList;
 
     //每个版本代表不同的意思。比如4就是存储的旋转
-    const int saveVersion = 6;
+    const int saveVersion = 7;
 
     //创建于销毁的控制条
     private float creationProgress, destructionProgress;
@@ -144,6 +144,7 @@ public class Game : PersistableObject
         {
             shapes[i].GameUpdate();
         }
+        GameLevel.Current.GameUpdate();
         inGameUpdateLoop = false;
         creationProgress += Time.deltaTime * CreationSpeed;
         while (creationProgress >= 1f)

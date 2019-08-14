@@ -2,7 +2,7 @@
 
 //生成各式不同形状
 //注：Random生成的各种形状的点位都是伪随机。如果重新加载就不一定跟上次一样了！！
-public abstract class SpawnZone : PersistableObject
+public abstract class SpawnZone : GameLevelObject
 {
     public abstract Vector3 SpawnPoint { get; }
 
@@ -94,6 +94,7 @@ public abstract class SpawnZone : PersistableObject
         int factoryIndex = Random.Range(0, spawnConfig.factories.Length);
         //生成prefab在指定的场景下
         Shape shape = spawnConfig.factories[factoryIndex].GetRandom();
+        shape.gameObject.layer = gameObject.layer;
 
         Transform t = shape.transform;
         t.localPosition = SpawnPoint;
@@ -197,6 +198,7 @@ public abstract class SpawnZone : PersistableObject
     {
         int factoryIndex = Random.Range(0, spawnConfig.factories.Length);
         Shape shape = spawnConfig.factories[factoryIndex].GetRandom();
+        shape.gameObject.layer = gameObject.layer;
         Transform t = shape.transform;
         t.localRotation = Random.rotation;
         t.localScale = focalShape.transform.localScale * 0.5f;
@@ -238,7 +240,7 @@ public abstract class SpawnZone : PersistableObject
         }
     }
 
-    private void FixedUpdate()
+    public override void GameUpdate()
     {
         spawnProgress += Time.deltaTime*spawnSpeed;
         while (spawnProgress >= 1f)
@@ -246,5 +248,15 @@ public abstract class SpawnZone : PersistableObject
             spawnProgress -= 1f;
             SpawnShapes();
         }
+    }
+
+    public override void Save(GameDataWriter writer)
+    {
+        writer.Write(spawnProgress);
+    }
+
+    public override void Load(GameDataReader reader)
+    {
+        spawnProgress = reader.ReadFloat();
     }
 }
