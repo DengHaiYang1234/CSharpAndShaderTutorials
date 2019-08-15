@@ -8,7 +8,7 @@ public class GameLevelInspector : Editor
 	public override void OnInspectorGUI()
 	{
 		DrawDefaultInspector();
-
+		
 		var gameLevel = (GameLevel)target;
 		if(gameLevel.HasMissingLevelObjects)
 		{

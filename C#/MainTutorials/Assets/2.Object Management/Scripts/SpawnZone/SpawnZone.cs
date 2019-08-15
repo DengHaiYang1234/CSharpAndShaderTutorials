@@ -62,10 +62,10 @@ public abstract class SpawnZone : GameLevelObject
             //生成时间
             [FloatRangeSlider(0f, 2f)]
             public FloatRange growingDuration;
-            [FloatRangeSlider(0f,100f)]
+            [FloatRangeSlider(0f, 100f)]
             public FloatRange adultDuration;
             //死亡时间
-            [FloatRangeSlider(0f,2f)]
+            [FloatRangeSlider(0f, 2f)]
             public FloatRange dyingDuration;
 
             public Vector3 RandomDurations
@@ -95,24 +95,13 @@ public abstract class SpawnZone : GameLevelObject
         //生成prefab在指定的场景下
         Shape shape = spawnConfig.factories[factoryIndex].GetRandom();
         shape.gameObject.layer = gameObject.layer;
-
         Transform t = shape.transform;
         t.localPosition = SpawnPoint;
         //随机旋转值
         t.localRotation = Random.rotation;
         t.localScale = Vector3.one * spawnConfig.scale.RandomValueInRange;
-
         SetupColor(shape);
-        
-        Vector3 lifecycleConfigurations = spawnConfig.lifecycle.RandomDurations;
 
-        int satelliteCount = spawnConfig.satellite.amount.RandomValueInRange;
-
-        for (int i = 0; i < satelliteCount; i++)
-        {
-            CreatSatelliterFor(shape,spawnConfig.satellite.uniformLifecycles ? lifecycleConfigurations : spawnConfig.lifecycle.RandomDurations);
-        }
-  
         //改变颜色HSV
         //https://blog.csdn.net/zgjllf1011/article/details/79391241
         //shape.SetColor(Random.ColorHSV(
@@ -137,10 +126,18 @@ public abstract class SpawnZone : GameLevelObject
             var movment = shape.AddBehavior<MovementShapeBehavior>();
             movment.Velocity = GetDirectionVector(spawnConfig.movementDirection, t) * speed;
         }
+        
+        Vector3 lifecycleConfigurations = spawnConfig.lifecycle.RandomDurations;
+
+        int satelliteCount = spawnConfig.satellite.amount.RandomValueInRange;
+
+        for (int i = 0; i < satelliteCount; i++)
+        {
+            CreatSatelliterFor(shape, spawnConfig.satellite.uniformLifecycles ? lifecycleConfigurations : spawnConfig.lifecycle.RandomDurations);
+        }
 
         SetupOscillation(shape);
-        CreatSatelliterFor(shape,lifecycleConfigurations);
-        //return shape;
+        SetupLifecycle(shape,lifecycleConfigurations);
     }
 
     Vector3 GetDirectionVector(SpawnConfiguration.SpawnMovementDirection direction, Transform t)
@@ -210,7 +207,7 @@ public abstract class SpawnZone : GameLevelObject
     }
 
     /// <summary>
-    /// 重新
+    /// 设定行为空间
     /// </summary>
     /// <param name="shape"> 绕目标旋转的obj </param>
     /// <param name="duraiton"> x：生成时间 y：持续时间 z：死亡时间 </param>
@@ -218,9 +215,9 @@ public abstract class SpawnZone : GameLevelObject
     {
         if (duration.x > 0f)
         {
-            if(duration.x > 0f)
+            if (duration.x > 0f)
             {
-                if(duration.y > 0f || duration.z > 0f)
+                if (duration.y > 0f || duration.z > 0f)
                 {
                     shape.AddBehavior<LifecycleShapeBehavior>().Initialize(shape, duration.x, duration.y, duration.z);
                 }
@@ -230,11 +227,11 @@ public abstract class SpawnZone : GameLevelObject
                 shape.AddBehavior<GrowingShapeBehavior>().Initialize(shape, duration.x);
             }
         }
-        else if(duration.y > 0f)
+        else if (duration.y > 0f)
         {
             shape.AddBehavior<LifecycleShapeBehavior>().Initialize(shape, duration.x, duration.y, duration.z);
         }
-        else if(duration.z > 0f)
+        else if (duration.z > 0f)
         {
             shape.AddBehavior<DyingShapeBehavior>().Initialize(shape, duration.z);
         }
@@ -242,7 +239,7 @@ public abstract class SpawnZone : GameLevelObject
 
     public override void GameUpdate()
     {
-        spawnProgress += Time.deltaTime*spawnSpeed;
+        spawnProgress += Time.deltaTime * spawnSpeed;
         while (spawnProgress >= 1f)
         {
             spawnProgress -= 1f;

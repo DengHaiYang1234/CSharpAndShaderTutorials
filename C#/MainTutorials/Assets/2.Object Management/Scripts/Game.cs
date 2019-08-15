@@ -171,9 +171,6 @@ public class Game : PersistableObject
         {
             for (int i = 0; i < killList.Count; i++)
             {
-                Debug.Log("IsValid:" + killList[i].IsValid);
-                Debug.Log("name:" + killList[i].Shape.name);
-                Debug.Log("====================================:");
                 if (killList[i].IsValid)
                 {
                     KillImmediately(killList[i].Shape);
@@ -324,6 +321,11 @@ public class Game : PersistableObject
     {
         shape.SaveIndex = shapes.Count;
         shapes.Add(shape);
+
+        foreach (var item in shapes)
+        {
+            Debug.Log("++++++++++++:" + item.name);
+        }
     }
 
     public Shape GetShape(int index)
