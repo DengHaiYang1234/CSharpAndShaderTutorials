@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//地图生成类
 public class GameBoard : MonoBehaviour
 {
     [SerializeField]
@@ -11,6 +13,9 @@ public class GameBoard : MonoBehaviour
     //箭头
     GameTile titlePrefab;
 
+    [SerializeField]
+    Texture2D gridTexture;
+
     Vector2 size;
 
     //箭头集合
@@ -19,12 +24,16 @@ public class GameBoard : MonoBehaviour
     Queue<GameTile> searchFrontier = new Queue<GameTile>();
 
 
+    GameTileContentFactory contentFactory;
+
+    bool showPaths,showGrid;
 
 
-    public void Initialize(Vector2 size)
+    public void Initialize(Vector2 size, GameTileContentFactory contentFactory)
     {
         //生成地板
         this.size = size;
+        this.contentFactory = contentFactory;
         ground.localScale = new Vector3(size.x, size.y, 1f);
         //创建箭头
         tiles = new GameTile[(int)(size.x * size.y)];
@@ -62,28 +71,40 @@ public class GameBoard : MonoBehaviour
                 //1 & 1 = 1   1 & 0 = 0   0 & 1 = 0  0 & 0 = 0
                 //1 | 1 = 1   1 | 0 = 1   0 | 1 = 1  0 | 0 = 0
 
-				//偶数&1肯定为0
+                //偶数&1肯定为0
                 tile.IsAlternative = (x & 1) == 0;
                 if ((y & 1) == 0)
                 {	//偶数行取反
                     tile.IsAlternative = !tile.IsAlternative;
                 }
+                tile.Content = contentFactory.Get(GameTileContentType.Empty);
             }
         }
 
-        FindPaths();
+        ToggleDestination(tiles[tiles.Length / 2]);
     }
 
-    void FindPaths()
+
+    //寻路算法
+    bool FindPaths()
     {
         foreach (GameTile tile in tiles)
         {
-            tile.ClearPath();
+            if (tile.Content.Type == GameTileContentType.Destination)
+            {
+                tile.BecomeDestination();
+                searchFrontier.Enqueue(tile);
+            }
+            else
+                tile.ClearPath();
         }
+        if (searchFrontier.Count == 0)
+            return false;
 
-        //设置目标位置
-        tiles[tiles.Length / 2].BecomeDestination();
-        searchFrontier.Enqueue(tiles[tiles.Length / 2]);
+        // //设置目标位置
+        // tiles[tiles.Length / 2].BecomeDestination();
+        // searchFrontier.Enqueue(tiles[tiles.Length / 2]);
+
 
 
         //获取每个tile的上下左右位置，累计与初始点的距离，并记录与初始点朝向
@@ -92,13 +113,13 @@ public class GameBoard : MonoBehaviour
             GameTile tile = searchFrontier.Dequeue();
             if (tile != null)
             {
-				//正常朝向
-				// searchFrontier.Enqueue(tile.GrowPathUp());
+                //正常朝向
+                // searchFrontier.Enqueue(tile.GrowPathUp());
                 // searchFrontier.Enqueue(tile.GrowPathBottom());
                 // searchFrontier.Enqueue(tile.GrowPathLeft());
                 // searchFrontier.Enqueue(tile.GrowPathRight());
 
-				//交叉朝向
+                //交叉朝向
                 if (tile.IsAlternative)
                 {
                     searchFrontier.Enqueue(tile.GrowPathUp());
@@ -106,21 +127,129 @@ public class GameBoard : MonoBehaviour
                     searchFrontier.Enqueue(tile.GrowPathLeft());
                     searchFrontier.Enqueue(tile.GrowPathRight());
                 }
-				else
-				{
-					searchFrontier.Enqueue(tile.GrowPathRight());
+                else
+                {
+                    searchFrontier.Enqueue(tile.GrowPathRight());
                     searchFrontier.Enqueue(tile.GrowPathLeft());
                     searchFrontier.Enqueue(tile.GrowPathBottom());
                     searchFrontier.Enqueue(tile.GrowPathUp());
-				}
+                }
 
             }
         }
 
-        foreach (GameTile tile in tiles)
-            tile.ShowPath();
+        foreach (var tile in tiles)
+        {
+            if (!tile.HashPath)
+                return false;
+        }
+
+        if (showPaths)
+        {
+            foreach (GameTile tile in tiles)
+                tile.ShowPath();
+        }
+
+        return true;
     }
 
+    public GameTile GetTile(Ray ray)
+    {
+        RaycastHit hit;
+        bool isHit = Physics.Raycast(ray, out hit);
+        if (isHit)
+        {
+            int x = (int)(hit.point.z + size.x * 0.5f);
+            int y = (int)(hit.point.z + size.y * 0.5f);
+            if (x >= 0 && x < size.x && y >= 0 && y < size.y)
+            {
+                return tiles[x + y * (int)size.y];
+            }
+        }
+        return null;
+    }
 
+    public void ToggleDestination(GameTile tile)
+    {
+        if (tile.Content.Type == GameTileContentType.Destination)
+        {
+            tile.Content = contentFactory.Get(GameTileContentType.Empty);
+            if (!FindPaths())
+            {
+                tile.Content = contentFactory.Get(GameTileContentType.Destination);
+                FindPaths();
+            }
+        }
+        else if (tile.Content.Type == GameTileContentType.Empty)
+        {
+            tile.Content = contentFactory.Get(GameTileContentType.Destination);
+            FindPaths();
+        }
+    }
 
+    public void ToggleWall(GameTile tile)
+    {
+        if (tile.Content.Type == GameTileContentType.Wall)
+        {
+            tile.Content = contentFactory.Get(GameTileContentType.Empty);
+            FindPaths();
+        }
+        else if (tile.Content.Type == GameTileContentType.Empty)
+        {
+            tile.Content = contentFactory.Get(GameTileContentType.Wall);
+            if (!FindPaths())
+            {
+                tile.Content = contentFactory.Get(GameTileContentType.Empty);
+                FindPaths();
+            }
+        }
+    }
+
+    public bool ShowPaths
+    {
+        get
+        {
+            return showPaths;
+        }
+        set
+        {
+            showPaths = value;
+            if (showPaths)
+            {
+                foreach (var tile in tiles)
+                {
+                    tile.ShowPath();
+                }
+            }
+            else
+            {
+                foreach (var tile in tiles)
+                {
+                    tile.HidePath();
+                }
+            }
+        }
+    }
+    
+    public bool ShowGrid
+    {
+        get
+        {
+            return showGrid;
+        }
+        set
+        {
+            showGrid = value;
+            Material m = ground.GetComponent<MeshRenderer>().material;
+            if(showGrid)
+            {
+                m.mainTexture = gridTexture;
+                m.SetTextureScale("_MainTex",size);
+            }
+            else
+            {
+                m.mainTexture = null;
+            }
+        }
+    }
 }

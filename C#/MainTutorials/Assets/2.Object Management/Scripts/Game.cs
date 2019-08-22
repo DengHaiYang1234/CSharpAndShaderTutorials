@@ -321,13 +321,8 @@ public class Game : PersistableObject
     {
         shape.SaveIndex = shapes.Count;
         shapes.Add(shape);
-
-        foreach (var item in shapes)
-        {
-            Debug.Log("++++++++++++:" + item.name);
-        }
     }
-
+    
     public Shape GetShape(int index)
     {
         return shapes[index];

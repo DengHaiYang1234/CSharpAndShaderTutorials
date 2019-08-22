@@ -6,6 +6,8 @@ public class GameTileContent : MonoBehaviour
 {
 	[SerializeField]
 	GameTileContentType type;
+
+	GameTileContentFactory originFactory;
 	
 	//public GameTileContentType Type => type;
 	public GameTileContentType Type
@@ -14,6 +16,24 @@ public class GameTileContent : MonoBehaviour
 		{
 			return type;
 		}
+	}
+
+	public GameTileContentFactory OriginFactory{
+		get
+		{
+			return originFactory;
+		}
+		set
+		{
+			Debug.Assert(originFactory == null,"Redefined origin factory!");
+			originFactory = value;
+		}
+	}
+
+	//回收
+	public void Recycle()
+	{
+		originFactory.Reclaim(this);
 	}
 
 }

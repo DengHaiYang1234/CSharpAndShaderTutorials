@@ -1,7 +1,4 @@
 sceneSetups:
-- path: Assets/2.Object Management/Scene/Main.unity
+- path: Assets/3.Tower Defense/Main.unity
   isLoaded: 1
   isActive: 1
-- path: Assets/2.Object Management/Scene/Level 2.unity
-  isLoaded: 1
-  isActive: 0

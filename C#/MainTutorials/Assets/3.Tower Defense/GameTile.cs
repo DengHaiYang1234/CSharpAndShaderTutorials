@@ -10,6 +10,8 @@ public class GameTile : MonoBehaviour
     //箭头朝向
     GameTile up, right, bottom, left, nextOnPath;
 
+    GameTileContent content;
+
     int distance;
 
     static Quaternion
@@ -18,6 +20,24 @@ public class GameTile : MonoBehaviour
         bottomRotation = Quaternion.Euler(90f, 180f, 0f),
         leftRotation = Quaternion.Euler(90f, 270, 0f);
 
+
+    public GameTileContent Content
+    {
+        get
+        {
+            return content;
+        }
+        set
+        {
+            Debug.Assert(value != null,"Null assigned to content");
+            if(content != null)
+            {
+                content.Recycle();
+            }
+            content = value;
+            content.transform.localPosition = transform.localPosition;
+        }
+    }
 
     //累计距离与朝向问题
     GameTile GrowPathTo(GameTile neighbor)
@@ -29,11 +49,11 @@ public class GameTile : MonoBehaviour
         neighbor.distance = distance + 1;
         //举例：该tile的右边的nextOnPath就是该tile,也就是箭头应该指的方向
         neighbor.nextOnPath = this;
-        return neighbor;
+        return neighbor.Content.Type != GameTileContentType.Wall ? neighbor : null;
     }
 
 
-	#region Static
+    #region Static
     //构建左右或上下关系，采用的是链表的方式
     public static void MakeLeftRightNeighbors(GameTile right, GameTile left)
     {
@@ -48,12 +68,12 @@ public class GameTile : MonoBehaviour
         up.bottom = bottom;
         bottom.up = up;
     }
-	#endregion
+    #endregion
 
 
-	#region Public
-	//确定正确的方向
-	public bool IsAlternative{get;set;}
+    #region Public
+    //确定正确的方向
+    public bool IsAlternative { get; set; }
     //reset
     public void ClearPath()
     {
@@ -76,6 +96,11 @@ public class GameTile : MonoBehaviour
 
             return false;
         }
+    }
+
+    public void HidePath()
+    {
+        arrow.gameObject.SetActive(false);
     }
 
 
@@ -107,5 +132,5 @@ public class GameTile : MonoBehaviour
             rightRotation;
     }
 
-	#endregion
+    #endregion
 }
