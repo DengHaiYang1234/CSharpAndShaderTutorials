@@ -37,11 +37,12 @@ public class GameBoard : MonoBehaviour
         ground.localScale = new Vector3(size.x, size.y, 1f);
         //创建箭头
         tiles = new GameTile[(int)(size.x * size.y)];
-        //获取间距
+        //x轴偏移及y轴偏移
         Vector2 offset = new Vector2(
             (size.x - 1) * 0.5f, (size.y - 1) * 0.5f
         );
 
+        //i:个数   x:行  y:列
         for (int i = 0, y = 0; y < size.y; y++)
         {
             for (int x = 0; x < size.x; x++, i++)
@@ -155,15 +156,19 @@ public class GameBoard : MonoBehaviour
 
     public GameTile GetTile(Ray ray)
     {
+        //实现原理：根据鼠标点击传过来的射线与带有碰撞器的物体碰撞所产生的坐标hit.point，就代表当前所点击的世界空间下的位置，
+        //那么通过(int)(hit.point.x + size.x * 0.5f)可以算出这是某行中的第几个
+        //通过(int)(hit.point.z + size.y * 0.5f)可以算出某列中的第几个
+        //最后因为每行之间相差size.x个元素，所以x + y * (int)size.x可以算出当前点击位置，在所有obj里面的index（所有obj的存储都是升序）
         RaycastHit hit;
         bool isHit = Physics.Raycast(ray, out hit);
         if (isHit)
         {
-            int x = (int)(hit.point.z + size.x * 0.5f);
+            int x = (int)(hit.point.x + size.x * 0.5f);
             int y = (int)(hit.point.z + size.y * 0.5f);
             if (x >= 0 && x < size.x && y >= 0 && y < size.y)
             {
-                return tiles[x + y * (int)size.y];
+                return tiles[x + y * (int)size.x];
             }
         }
         return null;
@@ -230,6 +235,8 @@ public class GameBoard : MonoBehaviour
             }
         }
     }
+    
+
     
     public bool ShowGrid
     {
