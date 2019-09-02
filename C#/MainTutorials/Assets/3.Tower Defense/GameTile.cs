@@ -29,8 +29,9 @@ public class GameTile : MonoBehaviour
             return null;
         //累计距离
         neighbor.distance = distance + 1;
-        //举例：该tile的右边的nextOnPath就是该tile,也就是箭头应该指的方向
+        //举例：下一步的行走的方向
         neighbor.nextOnPath = this;
+        //如果是墙，就不添加至路径（相当于绕过去）
         return neighbor.Content.Type != GameTileContentType.Wall ? neighbor : null;
     }
 

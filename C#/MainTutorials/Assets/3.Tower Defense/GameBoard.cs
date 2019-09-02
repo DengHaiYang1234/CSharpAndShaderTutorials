@@ -26,7 +26,7 @@ public class GameBoard : MonoBehaviour
 
     GameTileContentFactory contentFactory;
 
-    bool showPaths,showGrid;
+    bool showPaths, showGrid;
 
     //出生点集合
     List<GameTile> spawnPoints = new List<GameTile>();
@@ -112,8 +112,12 @@ public class GameBoard : MonoBehaviour
             else
                 tile.ClearPath();
         }
+
         if (searchFrontier.Count == 0)
+        {
             return false;
+        }
+
 
         // //设置目标位置
         // tiles[tiles.Length / 2].BecomeDestination();
@@ -155,7 +159,9 @@ public class GameBoard : MonoBehaviour
         foreach (var tile in tiles)
         {
             if (!tile.HashPath)
+            {
                 return false;
+            }
         }
 
         if (showPaths)
@@ -192,6 +198,7 @@ public class GameBoard : MonoBehaviour
         return spawnPoints[index];
     }
 
+    //生成目标位置
     public void ToggleDestination(GameTile tile)
     {
         if (tile.Content.Type == GameTileContentType.Destination)
@@ -209,12 +216,15 @@ public class GameBoard : MonoBehaviour
             FindPaths();
         }
     }
-    
+
     public void ToggleWall(GameTile tile)
     {
+        //若已经是Wall
         if (tile.Content.Type == GameTileContentType.Wall)
         {
+            //那么就清除
             tile.Content = contentFactory.Get(GameTileContentType.Empty);
+            //刷新Path
             FindPaths();
         }
         else if (tile.Content.Type == GameTileContentType.Empty)
@@ -230,15 +240,16 @@ public class GameBoard : MonoBehaviour
 
     public void ToggleSpawnPoint(GameTile tile)
     {
-        if(tile.Content.Type == GameTileContentType.SpawnPoint)
+        if (tile.Content.Type == GameTileContentType.SpawnPoint)
         {
-            if(spawnPoints.Count > 1)
+            if (spawnPoints.Count > 1)
             {
+                //再次点击清空
                 spawnPoints.Remove(tile);
                 tile.Content = contentFactory.Get(GameTileContentType.Empty);
             }
         }
-        else if(tile.Content.Type == GameTileContentType.Empty)
+        else if (tile.Content.Type == GameTileContentType.Empty)
         {
             tile.Content = contentFactory.Get(GameTileContentType.SpawnPoint);
             spawnPoints.Add(tile);
@@ -270,9 +281,9 @@ public class GameBoard : MonoBehaviour
             }
         }
     }
-    
 
-    
+
+
     public bool ShowGrid
     {
         get
@@ -283,10 +294,10 @@ public class GameBoard : MonoBehaviour
         {
             showGrid = value;
             Material m = ground.GetComponent<MeshRenderer>().material;
-            if(showGrid)
+            if (showGrid)
             {
                 m.mainTexture = gridTexture;
-                m.SetTextureScale("_MainTex",size);
+                m.SetTextureScale("_MainTex", size);
             }
             else
             {

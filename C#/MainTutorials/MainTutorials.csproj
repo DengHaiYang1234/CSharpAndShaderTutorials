@@ -121,7 +121,10 @@
     <Compile Include="Assets\2.Object Management\Scripts\Zone\LifeZone.cs" />
     <Compile Include="Assets\2.Object Management\Scripts\Zone\SpawnZone.cs" />
     <Compile Include="Assets\2.Object Management\Scripts\Zone\SphereSpawnZone.cs" />
+    <Compile Include="Assets\3.Tower Defense\Enemy.cs" />
+    <Compile Include="Assets\3.Tower Defense\EnemyFactory.cs" />
     <Compile Include="Assets\3.Tower Defense\GameBoard.cs" />
+    <Compile Include="Assets\3.Tower Defense\GameObjectFactory.cs" />
     <Compile Include="Assets\3.Tower Defense\GameTile.cs" />
     <Compile Include="Assets\3.Tower Defense\GameTileContent.cs" />
     <Compile Include="Assets\3.Tower Defense\GameTileContentFactory.cs" />

@@ -47,7 +47,6 @@ public class TowerGame : MonoBehaviour
     [SerializeField, Range(0.1f, 10f)]
     float spawnSpeed = 1f;
 
-
     float spawnProgress;
 
 	EnemyCollection enemies = new EnemyCollection();
