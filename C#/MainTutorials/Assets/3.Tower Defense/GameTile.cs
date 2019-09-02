@@ -21,24 +21,6 @@ public class GameTile : MonoBehaviour
         leftRotation = Quaternion.Euler(90f, 270, 0f);
 
 
-    public GameTileContent Content
-    {
-        get
-        {
-            return content;
-        }
-        set
-        {
-            Debug.Assert(value != null,"Null assigned to content");
-            if(content != null)
-            {
-                content.Recycle();
-            }
-            content = value;
-            content.transform.localPosition = transform.localPosition;
-        }
-    }
-
     //累计距离与朝向问题
     GameTile GrowPathTo(GameTile neighbor)
     {
@@ -130,6 +112,33 @@ public class GameTile : MonoBehaviour
             nextOnPath == left ? leftRotation :
             nextOnPath == bottom ? bottomRotation :
             rightRotation;
+    }
+    
+    public GameTile NextTileOnPath
+    {
+        get
+        {
+            return nextOnPath;
+        }
+    }
+
+
+    public GameTileContent Content
+    {
+        get
+        {
+            return content;
+        }
+        set
+        {
+            Debug.Assert(value != null, "Null assigned to content");
+            if (content != null)
+            {
+                content.Recycle();
+            }
+            content = value;
+            content.transform.localPosition = transform.localPosition;
+        }
     }
 
     #endregion

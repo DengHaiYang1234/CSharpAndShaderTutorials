@@ -2,77 +2,138 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TowerGame : MonoBehaviour 
+
+[System.Serializable]
+public class EnemyCollection
 {
-	[SerializeField]
-	Vector2 boardSize = new Vector2(11,11);
+    List<Enemy> enemies = new List<Enemy>();
 
-	[SerializeField]
-	GameBoard board;
+    public void Add(Enemy enemy)
+    {
+        enemies.Add(enemy);
+    }
 
-	[SerializeField]
-	GameTileContentFactory tileContentFactory;
+    public void GameUpdate()
+    {
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            if (!enemies[i].GameUpdate())
+            {
+                int lastIndex = enemies.Count - 1;
+                enemies[i] = enemies[lastIndex];
+                enemies.RemoveAt(lastIndex);
+                i -= 1;
+            }
+        }
+    }
+}
 
-	Ray TouchRay
-	{
-		get
-		{
-			return Camera.main.ScreenPointToRay(Input.mousePosition);
-		}
-	}
 
-	void Awake()
-	{
-		board.Initialize(boardSize,tileContentFactory);
-		board.ShowGrid = true;
-	}
 
-	void OnValidate()
-	{
-		if(boardSize.x < 2)
-			boardSize.x = 2;
+public class TowerGame : MonoBehaviour
+{
+    [SerializeField]
+    Vector2 boardSize = new Vector2(11, 11);
 
-		if(boardSize.y < 2)
-			boardSize.y = 2;	
-	}
+    [SerializeField]
+    GameBoard board;
 
-	void Update()
-	{
-		if(Input.GetMouseButtonDown(0))
-		{
-			HandleTouch();
-		}
-		else if(Input.GetMouseButtonDown(1))
-		{
-			HandleAlternativeTouch();
-		}
+    [SerializeField]
+    GameTileContentFactory tileContentFactory;
 
-		if(Input.GetKeyDown(KeyCode.V))
-		{
-			board.ShowPaths = !board.ShowPaths;
-		}
+    [SerializeField]
+    EnemyFactory enemyFactory;
 
-		if(Input.GetKeyDown(KeyCode.G))
-		{
-			board.ShowGrid = !board.ShowGrid;
-		}
-	}
+    [SerializeField, Range(0.1f, 10f)]
+    float spawnSpeed = 1f;
 
-	void HandleTouch()
-	{
-		GameTile tile = board.GetTile(TouchRay);
-		if(tile != null){
-			board.ToggleWall(tile);
-		}
-	}
 
-	void HandleAlternativeTouch()
-	{
-		GameTile tile = board.GetTile(TouchRay);
-		if(tile != null)
-		{
-			board.ToggleDestination(tile);
-		}
-	}
+    float spawnProgress;
+
+	EnemyCollection enemies = new EnemyCollection();
+
+    Ray TouchRay
+    {
+        get
+        {
+            return Camera.main.ScreenPointToRay(Input.mousePosition);
+        }
+    }
+
+    void Awake()
+    {
+        board.Initialize(boardSize, tileContentFactory);
+        board.ShowGrid = true;
+    }
+
+    void OnValidate()
+    {
+        if (boardSize.x < 2)
+            boardSize.x = 2;
+
+        if (boardSize.y < 2)
+            boardSize.y = 2;
+    }
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            HandleTouch();
+        }
+        else if (Input.GetMouseButtonDown(1))
+        {
+            HandleAlternativeTouch();
+        }
+
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            board.ShowPaths = !board.ShowPaths;
+        }
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            board.ShowGrid = !board.ShowGrid;
+        }
+
+        spawnProgress += spawnSpeed * Time.deltaTime;
+        while (spawnProgress >= 1f)
+        {
+            spawnProgress -= 1f;
+            SpawnEnemy();
+        }
+		enemies.GameUpdate();
+    }
+
+    void HandleTouch()
+    {
+        GameTile tile = board.GetTile(TouchRay);
+        if (tile != null)
+        {
+            board.ToggleWall(tile);
+        }
+    }
+
+    void HandleAlternativeTouch()
+    {
+        GameTile tile = board.GetTile(TouchRay);
+        if (tile != null)
+        {
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                board.ToggleDestination(tile);
+            }
+            else
+                board.ToggleSpawnPoint(tile);
+        }
+    }
+	
+    void SpawnEnemy()
+    {
+        GameTile spawnPoint = board.GetSpawnPoint(Random.Range(0, board.SpawnPointCount));
+        Enemy enemy = enemyFactory.Get();
+        enemy.SpawnOn(spawnPoint);
+		enemies.Add(enemy);
+    }
 
 }
