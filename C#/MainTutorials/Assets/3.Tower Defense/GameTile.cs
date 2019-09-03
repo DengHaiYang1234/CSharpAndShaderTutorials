@@ -2,10 +2,62 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum Direction
+{
+    Up, Right, Bottom, Left
+}
+
+public enum DirectionChange
+{
+    None, TurnRight, TurnLeft, TurnAround
+}
+
+public static class DirectionExtensions
+{
+    private static Quaternion[] rotations =
+    {
+        Quaternion.identity,
+        Quaternion.Euler(0f, 90f, 0f),
+        Quaternion.Euler(0f, 180f, 0f),
+        Quaternion.Euler(0f, 270f, 0f)
+    };
+
+    public static Quaternion GetRotation(this Direction direction)
+    {
+        return rotations[(int)direction];
+    }
+
+    public static DirectionChange GetDirectionChangeTo(this Direction current, Direction next)
+    {
+        if (current == next)
+        {
+            return DirectionChange.None;
+        }
+        else if (current + 1 == next || current - 3 == next)//例当前是上，向右转就是TurnRight
+        {
+            return DirectionChange.TurnRight;
+        }
+        else if (current - 1 == next || current + 3 == next)//当前是右，向上转就是TurnLeft
+        {
+            return DirectionChange.TurnLeft;
+        }
+        return DirectionChange.TurnAround;
+    }
+
+    public static float GetAngle(this Direction direction)
+    {
+        return (float)direction * 90f;
+    }
+}
+
+
+
 public class GameTile : MonoBehaviour
 {
     [SerializeField]
     Transform arrow;
+
 
     //箭头朝向
     GameTile up, right, bottom, left, nextOnPath;
@@ -22,7 +74,7 @@ public class GameTile : MonoBehaviour
 
 
     //累计距离与朝向问题
-    GameTile GrowPathTo(GameTile neighbor)
+    GameTile GrowPathTo(GameTile neighbor, Direction direction)
     {
         Debug.Assert(HashPath, "No path!");
         if (neighbor == null || neighbor.HashPath)
@@ -31,7 +83,11 @@ public class GameTile : MonoBehaviour
         neighbor.distance = distance + 1;
         //举例：下一步的行走的方向
         neighbor.nextOnPath = this;
-        //如果是墙，就不添加至路径（相当于绕过去）
+        //两点之间直线最短
+        neighbor.ExitPoint = (neighbor.transform.localPosition + transform.localPosition) * 0.5f;
+        //确定方向
+        neighbor.PathDirection = direction;
+        //如果是墙，就不添加此路径（相当于绕过去）
         return neighbor.Content.Type != GameTileContentType.Wall ? neighbor : null;
     }
 
@@ -51,6 +107,9 @@ public class GameTile : MonoBehaviour
         up.bottom = bottom;
         bottom.up = up;
     }
+
+
+
     #endregion
 
 
@@ -68,6 +127,7 @@ public class GameTile : MonoBehaviour
     {
         distance = 0;
         nextOnPath = null;
+        ExitPoint = transform.localPosition;
     }
 
     public bool HashPath
@@ -89,13 +149,14 @@ public class GameTile : MonoBehaviour
 
 
     //public GameTile GrowPathLeft() => GrowPathTo(left);
-    public GameTile GrowPathLeft() { return GrowPathTo(left); }
+    public GameTile GrowPathLeft() { return GrowPathTo(left, Direction.Right); }
     //public GameTile GrowPathRight() => GrowPathTo(right);
-    public GameTile GrowPathRight() { return GrowPathTo(right); }
+    public GameTile GrowPathRight() { return GrowPathTo(right, Direction.Left); }
     //public GameTile GrowPathUp() => GrowPathTo(up);
-    public GameTile GrowPathUp() { return GrowPathTo(up); }
+    public GameTile GrowPathUp() { return GrowPathTo(up, Direction.Bottom); }
     //public GameTile GrowPathBottom() => GrowPathTo(bottom);
-    public GameTile GrowPathBottom() { return GrowPathTo(bottom); }
+    public GameTile GrowPathBottom() { return GrowPathTo(bottom, Direction.Up); }
+
 
 
     //变换朝向
@@ -114,7 +175,7 @@ public class GameTile : MonoBehaviour
             nextOnPath == bottom ? bottomRotation :
             rightRotation;
     }
-    
+
     public GameTile NextTileOnPath
     {
         get
@@ -141,6 +202,11 @@ public class GameTile : MonoBehaviour
             content.transform.localPosition = transform.localPosition;
         }
     }
+
+    //走斜线
+    public Vector3 ExitPoint { get; private set; }
+
+    public Direction PathDirection { get; private set; }
 
     #endregion
 }

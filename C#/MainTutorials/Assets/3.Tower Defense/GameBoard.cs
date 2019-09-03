@@ -126,6 +126,7 @@ public class GameBoard : MonoBehaviour
 
 
         //获取每个tile的上下左右位置，累计与初始点的距离，并记录与初始点朝向
+        //注意，这里计算寻路是根据终点的位置来计算的（具体的画图理解...）
         while (searchFrontier.Count > 0)
         {
             GameTile tile = searchFrontier.Dequeue();
