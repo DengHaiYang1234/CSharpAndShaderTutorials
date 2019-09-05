@@ -7,19 +7,22 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     Transform model;
 
+    public float Scale { get; private set; }
+
     EnemyFactory originFactory;
 
     GameTile tileFrom, tileTo;
 
     Vector3 positionFrom, positionTo;
 
-    float progress, progressFactor; //progressFactor,越大表示动作越快
+    float progress, progressFactor; //progressFactor,转向速率
 
     private Direction direction;
     private DirectionChange directionChange;
     private float directionAngleFrom, directionAngleTo;
     float pathOffest;
     float speed;
+    private float Health { get; set; }
 
     public EnemyFactory OriginFactory
     {
@@ -36,9 +39,11 @@ public class Enemy : MonoBehaviour
 
     public void Initialize(float scale,float pathOffest,float speed)
     {
+        Scale = scale;
         model.localScale = new Vector3(scale,scale,scale);
         this.speed = speed;
         this.pathOffest = pathOffest;
+        Health = 100f;
     }
 
 
@@ -57,6 +62,12 @@ public class Enemy : MonoBehaviour
 
     public bool GameUpdate()
     {
+        if (Health <= 0f)
+        {
+            OriginFactory.Reclaim(this);
+            return false;
+        }
+
         progress += Time.deltaTime * progressFactor;
 
         while (progress >= 1f)
@@ -84,6 +95,12 @@ public class Enemy : MonoBehaviour
             transform.localRotation = Quaternion.Euler(0f, angle, 0f);
         }
         return true;
+    }
+
+    public void ApplyDamage(float damage)
+    {
+        Debug.Assert(damage >= 0f,"Negative damage applied.");
+        Health -= damage;
     }
 
 

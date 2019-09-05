@@ -125,6 +125,7 @@
     <Compile Include="Assets\2.Object Management\Scripts\Editor\FloatRangeSliderDrawer.cs" />
     <Compile Include="Assets\2.Object Management\Scripts\Editor\GameLevelInspector.cs" />
     <Compile Include="Assets\2.Object Management\Scripts\Editor\RegisterLevelObjectMenuItem.cs" />
+    <Compile Include="Assets\3.Tower Defense\Editor\TowerFloatRangeSliderDrawer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\1.BasicsTransform\Matria过多优化\Readme.txt" />

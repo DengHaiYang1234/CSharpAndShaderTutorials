@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 
-
-
 [CreateAssetMenu]
 public class GameTileContentFactory : GameObjectFactory 
 {
@@ -15,8 +13,8 @@ public class GameTileContentFactory : GameObjectFactory
 	GameTileContent wallPrefab;
 	[SerializeField]
 	GameTileContent spawnPointPrefab;
-	[SerializeField]
-	GameTileContent towerPrefab;
+    [SerializeField]
+    Tower[] towerPrefabs;
 	//回收
 	public void Reclaim(GameTileContent content)
 	{
@@ -39,9 +37,24 @@ public class GameTileContentFactory : GameObjectFactory
 			case GameTileContentType.Empty:return Get(emptyPrefab);
 			case GameTileContentType.Wall:return Get(wallPrefab);
 			case GameTileContentType.SpawnPoint:return Get(spawnPointPrefab);
-			case GameTileContentType.Tower:return Get(towerPrefab);
+			
 		}
-		Debug.Assert(false,"Unsupported type : " + type);
+		Debug.Assert(false,"Unsupported non-tower type : " + type);
 		return null;
 	}
+
+    public Tower Get(TowerType type)
+    {
+        Debug.Assert((int)type < towerPrefabs.Length,"Unsupported tower type!");
+        Tower prefab = towerPrefabs[(int) type];
+        Debug.Assert(type == prefab.TowerType,"Tower prefab at wrong index!");
+        return Get(prefab);
+    }
+
+    T Get<T>(T prefab) where T : GameTileContent
+    {
+        T instance = CreatGameObjectInstance(prefab);
+        instance.OriginFactory = this;
+        return instance;
+    }
 }

@@ -51,6 +51,8 @@ public class TowerGame : MonoBehaviour
 
     EnemyCollection enemies = new EnemyCollection();
 
+    TowerType selectedTowerType;
+
     Ray TouchRay
     {
         get
@@ -95,6 +97,15 @@ public class TowerGame : MonoBehaviour
             board.ShowGrid = !board.ShowGrid;
         }
 
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            selectedTowerType = TowerType.Laser;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            selectedTowerType = TowerType.Mortar;
+        }
+
         spawnProgress += spawnSpeed * Time.deltaTime;
         while (spawnProgress >= 1f)
         {
@@ -102,6 +113,7 @@ public class TowerGame : MonoBehaviour
             SpawnEnemy();
         }
         enemies.GameUpdate();
+        
         board.GameUpdate();
     }
 
@@ -112,7 +124,7 @@ public class TowerGame : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                board.ToggleTower(tile);
+                board.ToggleTower(tile,selectedTowerType);
             }
             else
                 board.ToggleWall(tile);
