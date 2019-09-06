@@ -4,24 +4,24 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class EnemyCollection
+public class GameBehaviorCollection
 {
-    List<Enemy> enemies = new List<Enemy>();
+    List<GameBehavior> behaviors = new List<GameBehavior>();
 
-    public void Add(Enemy enemy)
+    public void Add(GameBehavior behavior)
     {
-        enemies.Add(enemy);
+        behaviors.Add(behavior);
     }
 
     public void GameUpdate()
     {
-        for (int i = 0; i < enemies.Count; i++)
+        for (int i = 0; i < behaviors.Count; i++)
         {
-            if (!enemies[i].GameUpdate())
+            if (!behaviors[i].GameUpdate())
             {
-                int lastIndex = enemies.Count - 1;
-                enemies[i] = enemies[lastIndex];
-                enemies.RemoveAt(lastIndex);
+                int lastIndex = behaviors.Count - 1;
+                behaviors[i] = behaviors[lastIndex];
+                behaviors.RemoveAt(lastIndex);
                 i -= 1;
             }
         }
@@ -44,14 +44,28 @@ public class TowerGame : MonoBehaviour
     [SerializeField]
     EnemyFactory enemyFactory;
 
+    [SerializeField]
+    WarFactory warFactory;
+
     [SerializeField, Range(0.1f, 10f)]
     float spawnSpeed = 1f;
-
+    
     float spawnProgress;
 
-    EnemyCollection enemies = new EnemyCollection();
+    GameBehaviorCollection enemies = new GameBehaviorCollection();
+
+    GameBehaviorCollection noEnemies = new GameBehaviorCollection();
 
     TowerType selectedTowerType;
+
+    static TowerGame instance;
+
+    public static Shell SpawnShell()
+    {
+        Shell shell = instance.warFactory.Shell;
+        instance.noEnemies.Add(shell);
+        return shell;
+    }
 
     Ray TouchRay
     {
@@ -65,6 +79,11 @@ public class TowerGame : MonoBehaviour
     {
         board.Initialize(boardSize, tileContentFactory);
         board.ShowGrid = true;
+    }
+
+    void OnEnable()
+    {
+        instance = this;
     }
 
     void OnValidate()
@@ -113,8 +132,10 @@ public class TowerGame : MonoBehaviour
             SpawnEnemy();
         }
         enemies.GameUpdate();
-        
+
         board.GameUpdate();
+
+        noEnemies.GameUpdate();
     }
 
     void HandleTouch()
@@ -124,13 +145,13 @@ public class TowerGame : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                board.ToggleTower(tile,selectedTowerType);
+                board.ToggleTower(tile, selectedTowerType);
             }
             else
                 board.ToggleWall(tile);
         }
     }
-    
+
     void HandleAlternativeTouch()
     {
         GameTile tile = board.GetTile(TouchRay);
@@ -151,6 +172,13 @@ public class TowerGame : MonoBehaviour
         Enemy enemy = enemyFactory.Get();
         enemy.SpawnOn(spawnPoint);
         enemies.Add(enemy);
+    }
+
+    public static Explosion SpawnExplosion()
+    {
+        Explosion explosion = instance.warFactory.Explosion;
+        instance.noEnemies.Add(explosion);
+        return explosion;
     }
 
 }
