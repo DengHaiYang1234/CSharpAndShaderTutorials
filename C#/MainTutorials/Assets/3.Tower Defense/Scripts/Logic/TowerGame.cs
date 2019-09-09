@@ -26,12 +26,40 @@ public class GameBehaviorCollection
             }
         }
     }
+
+    public bool IsEmpty
+    {
+        get
+        {
+            return behaviors.Count == 0;
+        }
+    }
+
+    public void Clear()
+    {
+        for (int i = 0; i < behaviors.Count; i++)
+        {
+            behaviors[i].Recycle();
+        }
+        behaviors.Clear();
+    }
 }
 
 
 
 public class TowerGame : MonoBehaviour
 {
+    [SerializeField]
+    GameScenario scenario;
+
+    [SerializeField, Range(0, 100)]
+    int startingPlayerHealth = 10;
+
+    [SerializeField, Range(1f, 10f)]
+    float playSpeed = 1f;
+
+    GameScenario.State activeScenario;
+
     [SerializeField]
     Vector2 boardSize = new Vector2(11, 11);
 
@@ -41,22 +69,28 @@ public class TowerGame : MonoBehaviour
     [SerializeField]
     GameTileContentFactory tileContentFactory;
 
-    [SerializeField]
-    EnemyFactory enemyFactory;
+    // [SerializeField]
+    // EnemyFactory enemyFactory;
 
     [SerializeField]
     WarFactory warFactory;
 
-    [SerializeField, Range(0.1f, 10f)]
-    float spawnSpeed = 1f;
-    
-    float spawnProgress;
+    // [SerializeField, Range(0.1f, 10f)]
+    // float spawnSpeed = 1f;
+
+    // float spawnProgress;
+
+
 
     GameBehaviorCollection enemies = new GameBehaviorCollection();
 
     GameBehaviorCollection noEnemies = new GameBehaviorCollection();
 
     TowerType selectedTowerType;
+
+    int palyerHealth;
+
+    const float pausedTimeScale = 0f;
 
     static TowerGame instance;
 
@@ -77,8 +111,10 @@ public class TowerGame : MonoBehaviour
 
     void Awake()
     {
+        palyerHealth = startingPlayerHealth;
         board.Initialize(boardSize, tileContentFactory);
         board.ShowGrid = true;
+        activeScenario = scenario.Begin();
     }
 
     void OnEnable()
@@ -93,6 +129,15 @@ public class TowerGame : MonoBehaviour
 
         if (boardSize.y < 2)
             boardSize.y = 2;
+    }
+
+    void BeginNewGame()
+    {
+        palyerHealth = startingPlayerHealth;
+        enemies.Clear();
+        noEnemies.Clear();
+        board.Clear();
+        activeScenario = scenario.Begin();
     }
 
     void Update()
@@ -116,6 +161,18 @@ public class TowerGame : MonoBehaviour
             board.ShowGrid = !board.ShowGrid;
         }
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Time.timeScale = Time.timeScale > pausedTimeScale ? pausedTimeScale : playSpeed;
+        }
+        else if (Time.deltaTime > pausedTimeScale)
+        {
+            Time.timeScale = playSpeed;
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+            BeginNewGame();
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             selectedTowerType = TowerType.Laser;
@@ -125,12 +182,28 @@ public class TowerGame : MonoBehaviour
             selectedTowerType = TowerType.Mortar;
         }
 
-        spawnProgress += spawnSpeed * Time.deltaTime;
-        while (spawnProgress >= 1f)
+        // spawnProgress += spawnSpeed * Time.deltaTime;
+        // while (spawnProgress >= 1f)
+        // {
+        //     spawnProgress -= 1f;
+        //     SpawnEnemy();
+        // }
+
+        if (palyerHealth <= 0 && startingPlayerHealth > 0)
         {
-            spawnProgress -= 1f;
-            SpawnEnemy();
+            Debug.Log("Defate!");
+            BeginNewGame();
         }
+
+        if (!activeScenario.Progress() && enemies.IsEmpty)
+        {
+            Debug.Log("Victory!");
+            BeginNewGame();
+            activeScenario.Progress();
+        }
+
+        activeScenario.Progress();
+
         enemies.GameUpdate();
 
         board.GameUpdate();
@@ -166,19 +239,24 @@ public class TowerGame : MonoBehaviour
         }
     }
 
-    void SpawnEnemy()
+    public static void SpawnEnemy(EnemyFactory factory, EnemyType type)
     {
-        GameTile spawnPoint = board.GetSpawnPoint(Random.Range(0, board.SpawnPointCount));
-        Enemy enemy = enemyFactory.Get((EnemyType)(Random.Range(0,3)));
+        GameTile spawnPoint = instance.board.GetSpawnPoint(Random.Range(0, instance.board.SpawnPointCount));
+        Enemy enemy = factory.Get((EnemyType)(Random.Range(0, 3)));
         enemy.SpawnOn(spawnPoint);
-        enemies.Add(enemy);
+        instance.enemies.Add(enemy);
     }
-    
+
     public static Explosion SpawnExplosion()
     {
         Explosion explosion = instance.warFactory.Explosion;
         instance.noEnemies.Add(explosion);
         return explosion;
+    }
+
+    public static void EnemyReachedDestination()
+    {
+        instance.palyerHealth -= 1;
     }
 
 }

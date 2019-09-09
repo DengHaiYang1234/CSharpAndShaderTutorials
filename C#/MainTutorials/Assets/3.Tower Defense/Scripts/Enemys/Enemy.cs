@@ -64,7 +64,8 @@ public class Enemy : GameBehavior
     {
         if (Health <= 0f)
         {
-            OriginFactory.Reclaim(this);
+            //OriginFactory.Reclaim(this);
+            Recycle();
             return false;
         }
 
@@ -74,7 +75,8 @@ public class Enemy : GameBehavior
         {
             if (tileTo == null)
             {
-                OriginFactory.Reclaim(this);
+                TowerGame.EnemyReachedDestination();
+                Recycle();
                 return false;
             }
 
@@ -211,6 +213,11 @@ public class Enemy : GameBehavior
         //向朝向方向移动0.5个距离
         transform.localPosition = positionFrom;
         progressFactor = speed / (Mathf.PI * Mathf.Max(Mathf.Abs(pathOffest),0.2f));
+    }
+
+    public override void Recycle()
+    {
+        originFactory.Reclaim(this);
     }
 
 }

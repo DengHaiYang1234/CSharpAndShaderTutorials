@@ -99,15 +99,16 @@ public class GameBoard : MonoBehaviour
                 {	//偶数行取反
                     tile.IsAlternative = !tile.IsAlternative;
                 }
-                tile.Content = contentFactory.Get(GameTileContentType.Empty);
+                //tile.Content = contentFactory.Get(GameTileContentType.Empty);
             }
         }
 
-        ToggleDestination(tiles[tiles.Length / 2]);
-        ToggleSpawnPoint(tiles[0]);
+        // ToggleDestination(tiles[tiles.Length / 2]);
+        // ToggleSpawnPoint(tiles[0]);
+        Clear();
     }
     
-
+    
 
     //寻路算法
     bool FindPaths()
@@ -351,5 +352,18 @@ public class GameBoard : MonoBehaviour
                 m.mainTexture = null;
             }
         }
+    }
+
+    public void Clear()
+    {
+        foreach (GameTile tile in tiles)
+        {
+            tile.Content = contentFactory.Get(GameTileContentType.Empty);
+        }
+
+        spawnPoints.Clear();
+        updatingContent.Clear();
+        ToggleDestination(tiles[tiles.Length / 2]);
+        ToggleSpawnPoint(tiles[0]);
     }
 }

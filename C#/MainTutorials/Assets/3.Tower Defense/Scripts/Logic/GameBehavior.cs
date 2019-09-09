@@ -8,4 +8,6 @@ public abstract class GameBehavior : MonoBehaviour
 	{
 		return true;
 	}
+
+	public abstract void Recycle();
 }
