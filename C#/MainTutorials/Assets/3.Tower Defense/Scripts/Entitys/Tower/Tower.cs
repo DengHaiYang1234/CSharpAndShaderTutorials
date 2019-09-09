@@ -62,7 +62,7 @@ public abstract class Tower : GameTileContent
         {
             return false;
         }
-
+        
         Vector3 a = transform.localPosition;
         Vector3 b = target.Position;
         float x = a.x - b.x;

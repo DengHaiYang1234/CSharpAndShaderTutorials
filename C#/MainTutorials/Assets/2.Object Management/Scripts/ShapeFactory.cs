@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
+[CreateAssetMenu(fileName = "ShapeFactory", menuName = "Object Management/WarFactory", order = 1)]
 //资源类，根据已设置好的资源来创建实例
-[CreateAssetMenu]
 public class ShapeFactory : ScriptableObject
 {
 

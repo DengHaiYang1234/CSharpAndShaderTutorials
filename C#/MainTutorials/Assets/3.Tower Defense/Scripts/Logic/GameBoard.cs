@@ -106,7 +106,7 @@ public class GameBoard : MonoBehaviour
         ToggleDestination(tiles[tiles.Length / 2]);
         ToggleSpawnPoint(tiles[0]);
     }
-
+    
 
 
     //寻路算法

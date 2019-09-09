@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "GameTileContentFactory", menuName = "Tower Defense/GameTileContentFactory", order = 2)]
 public class GameTileContentFactory : GameObjectFactory 
 {
 	[SerializeField]

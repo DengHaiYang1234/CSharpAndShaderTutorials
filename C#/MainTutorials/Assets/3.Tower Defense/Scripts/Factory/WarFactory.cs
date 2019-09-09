@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "WarFactory", menuName = "Tower Defense/WarFactory", order = 2)]
 public class WarFactory : GameObjectFactory 
 {
 	[SerializeField]

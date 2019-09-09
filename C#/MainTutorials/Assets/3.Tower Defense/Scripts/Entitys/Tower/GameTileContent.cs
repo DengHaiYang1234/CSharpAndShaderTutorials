@@ -16,7 +16,7 @@ public class GameTileContent : MonoBehaviour
 	{
 
 	}
-
+	
 	public bool BlocksPath
 	{
 		get

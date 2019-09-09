@@ -37,16 +37,16 @@ public class Enemy : GameBehavior
         }
     }
 
-    public void Initialize(float scale,float pathOffest,float speed)
+    public void Initialize(float scale,float pathOffest,float speed,float health)
     {
         Scale = scale;
         model.localScale = new Vector3(scale,scale,scale);
         this.speed = speed;
         this.pathOffest = pathOffest;
-        Health = 100f;
+        Health = health;
     }
 
-
+    
     public void SpawnOn(GameTile tile)
     {
         Debug.Assert(tile.NextTileOnPath != null, "Nowhere to go!", this);
