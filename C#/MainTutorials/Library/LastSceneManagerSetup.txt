@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/3.Tower Defense/Main.unity
+- path: Assets/4.Flow/1.Faking Liquid/Main.unity
   isLoaded: 1
   isActive: 1

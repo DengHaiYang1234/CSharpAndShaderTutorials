@@ -123,21 +123,30 @@
     <Compile Include="Assets\2.Object Management\Scripts\Zone\SphereSpawnZone.cs" />
     <Compile Include="Assets\3.Tower Defense\Helper\TowerFloatRange.cs" />
     <Compile Include="Assets\3.Tower Defense\Helper\TowerFloatRangeSliderAttribute.cs" />
-    <Compile Include="Assets\3.Tower Defense\Scripts\Direction.cs" />
-    <Compile Include="Assets\3.Tower Defense\Scripts\Enemy.cs" />
-    <Compile Include="Assets\3.Tower Defense\Scripts\EnemyFactory.cs" />
+    <Compile Include="Assets\3.Tower Defense\Scripts\Enemys\Enemy.cs" />
+    <Compile Include="Assets\3.Tower Defense\Scripts\Enemys\EnemySpawnSequence.cs" />
+    <Compile Include="Assets\3.Tower Defense\Scripts\Enemys\EnemyWave.cs" />
+    <Compile Include="Assets\3.Tower Defense\Scripts\Entitys\Tower\Explosion.cs" />
+    <Compile Include="Assets\3.Tower Defense\Scripts\Entitys\Tower\GameTileContent.cs" />
+    <Compile Include="Assets\3.Tower Defense\Scripts\Entitys\Tower\LaserTower.cs" />
+    <Compile Include="Assets\3.Tower Defense\Scripts\Entitys\Tower\MortarTower.cs" />
+    <Compile Include="Assets\3.Tower Defense\Scripts\Entitys\Tower\Shell.cs" />
+    <Compile Include="Assets\3.Tower Defense\Scripts\Entitys\Tower\Tower.cs" />
+    <Compile Include="Assets\3.Tower Defense\Scripts\Enums\EnemyType.cs" />
     <Compile Include="Assets\3.Tower Defense\Scripts\Enums\GameTileContentType.cs" />
     <Compile Include="Assets\3.Tower Defense\Scripts\Enums\TowerType.cs" />
-    <Compile Include="Assets\3.Tower Defense\Scripts\GameBoard.cs" />
-    <Compile Include="Assets\3.Tower Defense\Scripts\GameObjectFactory.cs" />
-    <Compile Include="Assets\3.Tower Defense\Scripts\GameTile.cs" />
-    <Compile Include="Assets\3.Tower Defense\Scripts\GameTileContentFactory.cs" />
-    <Compile Include="Assets\3.Tower Defense\Scripts\Tower.cs" />
-    <Compile Include="Assets\3.Tower Defense\Scripts\Tower\GameTileContent.cs" />
-    <Compile Include="Assets\3.Tower Defense\Scripts\Tower\LaserTower.cs" />
-    <Compile Include="Assets\3.Tower Defense\Scripts\Tower\MortarTower.cs" />
-    <Compile Include="Assets\3.Tower Defense\Scripts\Tower\TargetPoint.cs" />
-    <Compile Include="Assets\3.Tower Defense\Scripts\TowerGame.cs" />
+    <Compile Include="Assets\3.Tower Defense\Scripts\Factory\EnemyFactory.cs" />
+    <Compile Include="Assets\3.Tower Defense\Scripts\Factory\GameObjectFactory.cs" />
+    <Compile Include="Assets\3.Tower Defense\Scripts\Factory\GameTileContentFactory.cs" />
+    <Compile Include="Assets\3.Tower Defense\Scripts\Factory\WarEntity.cs" />
+    <Compile Include="Assets\3.Tower Defense\Scripts\Factory\WarFactory.cs" />
+    <Compile Include="Assets\3.Tower Defense\Scripts\Logic\Direction.cs" />
+    <Compile Include="Assets\3.Tower Defense\Scripts\Logic\GameBehavior.cs" />
+    <Compile Include="Assets\3.Tower Defense\Scripts\Logic\GameBoard.cs" />
+    <Compile Include="Assets\3.Tower Defense\Scripts\Logic\GameScenario.cs" />
+    <Compile Include="Assets\3.Tower Defense\Scripts\Logic\GameTile.cs" />
+    <Compile Include="Assets\3.Tower Defense\Scripts\Logic\TargetPoint.cs" />
+    <Compile Include="Assets\3.Tower Defense\Scripts\Logic\TowerGame.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\1.BasicsTransform\Matria过多优化\Readme.txt" />
@@ -148,6 +157,8 @@
     <None Include="Assets\2.Object Management\Readme.txt" />
     <None Include="Assets\2.Object Management\Shaders\InstancedColors.shader" />
     <None Include="Assets\3.Tower Defense\Readme.Txt" />
+    <None Include="Assets\4.Flow\1.Faking Liquid\DistortionFlow.shader" />
+    <None Include="Assets\4.Flow\1.Faking Liquid\Flow.cginc" />
     <None Include="Assets\Readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
