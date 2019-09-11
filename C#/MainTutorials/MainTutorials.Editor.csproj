@@ -126,6 +126,7 @@
     <Compile Include="Assets\2.Object Management\Scripts\Editor\GameLevelInspector.cs" />
     <Compile Include="Assets\2.Object Management\Scripts\Editor\RegisterLevelObjectMenuItem.cs" />
     <Compile Include="Assets\3.Tower Defense\Editor\TowerFloatRangeSliderDrawer.cs" />
+    <Compile Include="Assets\Editor\ShaderEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\1.BasicsTransform\Matria过多优化\Readme.txt" />
@@ -138,7 +139,6 @@
     <None Include="Assets\3.Tower Defense\Readme.Txt" />
     <None Include="Assets\4.Flow\1.Faking Liquid\DistortionFlow.shader" />
     <None Include="Assets\4.Flow\1.Faking Liquid\Flow.cginc" />
-    <None Include="Assets\Readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
