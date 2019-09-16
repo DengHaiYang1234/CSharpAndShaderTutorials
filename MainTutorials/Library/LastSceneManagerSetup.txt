@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/4.Flow/2.Directional Flow/Main.unity
+  isLoaded: 1
+  isActive: 1

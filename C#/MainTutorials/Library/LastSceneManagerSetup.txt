@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/4.Flow/1.Faking Liquid/Main.unity
-  isLoaded: 1
-  isActive: 1

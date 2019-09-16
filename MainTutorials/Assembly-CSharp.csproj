@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <RootNamespace></RootNamespace>
+    <ProjectGuid>{D50C0EFB-E18E-BE52-C0B6-40AF35D8EFBD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <BaseDirectory>Assets</BaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_5_6_3;UNITY_5_6;UNITY_5;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_GENERICS;ENABLE_PVR_GI;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_RUNTIME_NAVMESH_BUILDING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_NATIVE_ARRAY;INCLUDE_DYNAMIC_GI;INCLUDE_GI;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_SCRIPTING_NEW_CSHARP_COMPILER;ENABLE_VIDEO;UNITY_STANDALONE_OSX;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_GAMECENTER;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_VR;ENABLE_CLUSTERINPUT;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_2_0_SUBSET;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_OSX;ENABLE_NATIVE_ARRAY_CHECKS;UNITY_TEAM_LICENSE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Temp\bin\Release\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnityEngine">
+      <HintPath>/Applications/Unity5.6.3/Unity5.6.3.app/Contents/Managed/UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>/Applications/Unity5.6.3/Unity5.6.3.app/Contents/Managed/UnityEditor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\1.BasicsTransform\Matria过多优化\Fractal.cs" />
+     <Compile Include="Assets\1.BasicsTransform\Matria过多优化\RemoteFractal.cs" />
+     <Compile Include="Assets\1.BasicsTransform\动态或静态的图形\GraphFunction.cs" />
+     <Compile Include="Assets\1.BasicsTransform\动态或静态的图形\GraphFunctionName.cs" />
+     <Compile Include="Assets\1.BasicsTransform\动态或静态的图形\LocalGraph.cs" />
+     <Compile Include="Assets\1.BasicsTransform\时钟\Clock.cs" />
+     <Compile Include="Assets\1.BasicsTransform\计算FPS优化\FPSCounter.cs" />
+     <Compile Include="Assets\1.BasicsTransform\计算FPS优化\FPSDisplay.cs" />
+     <Compile Include="Assets\1.BasicsTransform\计算FPS优化\Nucleon.cs" />
+     <Compile Include="Assets\1.BasicsTransform\计算FPS优化\NucleonSpawner.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\Behavior\DyingShapeBehavior.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\Behavior\GrowingShapeBehavior.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\Behavior\LifecycleShapeBehavior.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\Behavior\MovementShapeBehavior.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\Behavior\OscillationShapeBehavior.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\Behavior\RotationShapeBehavior.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\Behavior\SatelliteShapeBehavior.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\Behavior\ShapeBehavior.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\Behavior\ShapeBehaviorPool.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\Game.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\GameLevel.Editor.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\GameLevel.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\GameLevelObject.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\Helper\ColorRangeHSV.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\Helper\FloatRange.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\Helper\FloatRangeSliderAttribute.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\Helper\IntRange.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\PersistableObject.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\PersistentStorage.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\RotatingObject.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\Shape.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\ShapeFactory.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\ShapeInstance.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\Test.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\WriteAndReader\GameDataReader.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\WriteAndReader\GameDataWriter.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\Zone\CompositeSpawnZone.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\Zone\CubeSpawnZone.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\Zone\KillZone.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\Zone\LifeZone.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\Zone\SpawnZone.cs" />
+     <Compile Include="Assets\2.Object Management\Scripts\Zone\SphereSpawnZone.cs" />
+     <Compile Include="Assets\3.Tower Defense\Helper\TowerFloatRange.cs" />
+     <Compile Include="Assets\3.Tower Defense\Helper\TowerFloatRangeSliderAttribute.cs" />
+     <Compile Include="Assets\3.Tower Defense\Scripts\Enemys\Enemy.cs" />
+     <Compile Include="Assets\3.Tower Defense\Scripts\Enemys\EnemySpawnSequence.cs" />
+     <Compile Include="Assets\3.Tower Defense\Scripts\Enemys\EnemyWave.cs" />
+     <Compile Include="Assets\3.Tower Defense\Scripts\Entitys\Tower\Explosion.cs" />
+     <Compile Include="Assets\3.Tower Defense\Scripts\Entitys\Tower\GameTileContent.cs" />
+     <Compile Include="Assets\3.Tower Defense\Scripts\Entitys\Tower\LaserTower.cs" />
+     <Compile Include="Assets\3.Tower Defense\Scripts\Entitys\Tower\MortarTower.cs" />
+     <Compile Include="Assets\3.Tower Defense\Scripts\Entitys\Tower\Shell.cs" />
+     <Compile Include="Assets\3.Tower Defense\Scripts\Entitys\Tower\Tower.cs" />
+     <Compile Include="Assets\3.Tower Defense\Scripts\Enums\EnemyType.cs" />
+     <Compile Include="Assets\3.Tower Defense\Scripts\Enums\GameTileContentType.cs" />
+     <Compile Include="Assets\3.Tower Defense\Scripts\Enums\TowerType.cs" />
+     <Compile Include="Assets\3.Tower Defense\Scripts\Factory\EnemyFactory.cs" />
+     <Compile Include="Assets\3.Tower Defense\Scripts\Factory\GameObjectFactory.cs" />
+     <Compile Include="Assets\3.Tower Defense\Scripts\Factory\GameTileContentFactory.cs" />
+     <Compile Include="Assets\3.Tower Defense\Scripts\Factory\WarEntity.cs" />
+     <Compile Include="Assets\3.Tower Defense\Scripts\Factory\WarFactory.cs" />
+     <Compile Include="Assets\3.Tower Defense\Scripts\Logic\Direction.cs" />
+     <Compile Include="Assets\3.Tower Defense\Scripts\Logic\GameBehavior.cs" />
+     <Compile Include="Assets\3.Tower Defense\Scripts\Logic\GameBoard.cs" />
+     <Compile Include="Assets\3.Tower Defense\Scripts\Logic\GameScenario.cs" />
+     <Compile Include="Assets\3.Tower Defense\Scripts\Logic\GameTile.cs" />
+     <Compile Include="Assets\3.Tower Defense\Scripts\Logic\TargetPoint.cs" />
+     <Compile Include="Assets\3.Tower Defense\Scripts\Logic\TowerGame.cs" />
+     <None Include="Assets\1.BasicsTransform\时钟\Readme.txt" />
+     <None Include="Assets\4.Flow\2.Directional Flow\Flow.cginc" />
+     <None Include="Assets\1.BasicsTransform\动态或静态的图形\Readme.txt" />
+     <None Include="Assets\1.BasicsTransform\动态或静态的图形\ColoredPoint.shader" />
+     <None Include="Assets\2.Object Management\Shaders\InstancedColors.shader" />
+     <None Include="Assets\4.Flow\1.Faking Liquid\DistortionFlow.shader" />
+     <None Include="Assets\4.Flow\1.Faking Liquid\Flow.cginc" />
+     <None Include="Assets\4.Flow\2.Directional Flow\DirectionalFlow.shader" />
+     <None Include="Assets\1.BasicsTransform\计算FPS优化\Readme.txt" />
+     <None Include="Assets\4.Flow\2.Directional Flow\Readme.txt" />
+     <None Include="Assets\1.BasicsTransform\Matria过多优化\Readme.txt" />
+     <None Include="Assets\4.Flow\1.Faking Liquid\Readme.txt" />
+     <None Include="Assets\2.Object Management\Readme.txt" />
+ <Reference Include="UnityEngine.UI">
+ <HintPath>/Applications/Unity5.6.3/Unity5.6.3.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>/Applications/Unity5.6.3/Unity5.6.3.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.TestRunner">
+ <HintPath>/Applications/Unity5.6.3/Unity5.6.3.app/Contents/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
+ </Reference>
+ <Reference Include="nunit.framework">
+ <HintPath>/Applications/Unity5.6.3/Unity5.6.3.app/Contents/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>/Applications/Unity5.6.3/Unity5.6.3.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.HoloLens">
+ <HintPath>/Applications/Unity5.6.3/Unity5.6.3.app/Contents/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.VR">
+ <HintPath>/Applications/Unity5.6.3/Unity5.6.3.app/Contents/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>
