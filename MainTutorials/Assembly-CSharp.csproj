@@ -115,6 +115,8 @@
      <Compile Include="Assets\3.Tower Defense\Scripts\Logic\TargetPoint.cs" />
      <Compile Include="Assets\3.Tower Defense\Scripts\Logic\TowerGame.cs" />
      <None Include="Assets\1.BasicsTransform\时钟\Readme.txt" />
+     <None Include="Assets\4.Flow\3.Sine Wave\Readme.txt" />
+     <None Include="Assets\4.Flow\3.Sine Wave\Waves.shader" />
      <None Include="Assets\4.Flow\2.Directional Flow\Flow.cginc" />
      <None Include="Assets\1.BasicsTransform\动态或静态的图形\Readme.txt" />
      <None Include="Assets\1.BasicsTransform\动态或静态的图形\ColoredPoint.shader" />

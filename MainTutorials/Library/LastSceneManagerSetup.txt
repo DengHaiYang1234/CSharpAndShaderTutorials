@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/4.Flow/2.Directional Flow/Main.unity
+- path: Assets/4.Flow/3.Sine Wave/Main.unity
   isLoaded: 1
   isActive: 1
