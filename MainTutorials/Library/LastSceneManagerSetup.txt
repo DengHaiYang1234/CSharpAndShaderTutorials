@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/4.Flow/3.Sine Wave/Main.unity
+- path: Assets/4.Flow/4.Looking Through Water/Scene.unity
   isLoaded: 1
   isActive: 1
