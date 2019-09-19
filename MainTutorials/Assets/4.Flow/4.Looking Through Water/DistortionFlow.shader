@@ -14,6 +14,7 @@
 		_HeightScaleModulated ("Height Scale, Modulated", Float) = 0.75
 		_WaterFogColor("Water Fog Color",Color) = (0,0,0,0)
 		_WaterFogDestity("Water Fog Density",Range(0,2)) = 0.1
+		_RefractionStrength("Refraction Strength",Range(0,1)) = 0.25
 		_Glossiness ("Smoothness", Range(0,1)) = 0.5
 		_Metallic ("Metallic", Range(0,1)) = 0.0
 	}
@@ -22,7 +23,7 @@
 		LOD 200
 
 		GrabPass
-		{
+		{	
 			//每帧抓取的渲染都存在_WaterBackground纹理中，该纹理是在真正渲染到屏幕之前就已经绘制
 			"_WaterBackground"
 		}

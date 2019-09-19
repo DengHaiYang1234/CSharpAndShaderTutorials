@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/4.Flow/4.Looking Through Water/Scene.unity
+- path: Assets/5.Mesh/1.Procedural Grid/Main.unity
   isLoaded: 1
   isActive: 1
