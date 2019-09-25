@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/5.Mesh/1.Procedural Grid/Main.unity
+- path: Assets/5.Mesh/2.Rounded Cube/Cube Scene.unity
   isLoaded: 1
   isActive: 1
