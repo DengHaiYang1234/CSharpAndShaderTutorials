@@ -114,6 +114,9 @@
      <Compile Include="Assets\3.Tower Defense\Scripts\Logic\GameTile.cs" />
      <Compile Include="Assets\3.Tower Defense\Scripts\Logic\TargetPoint.cs" />
      <Compile Include="Assets\3.Tower Defense\Scripts\Logic\TowerGame.cs" />
+     <Compile Include="Assets\5.Mesh\1.Procedural Grid\Grid.cs" />
+     <Compile Include="Assets\5.Mesh\2.Rounded Cube\Cube.cs" />
+     <Compile Include="Assets\5.Mesh\2.Rounded Cube\Grid.cs" />
      <None Include="Assets\1.BasicsTransform\时钟\Readme.txt" />
      <None Include="Assets\4.Flow\3.Sine Wave\Readme.txt" />
      <None Include="Assets\4.Flow\3.Sine Wave\Waves.shader" />

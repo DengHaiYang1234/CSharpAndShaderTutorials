@@ -6,7 +6,6 @@ public class Cube : MonoBehaviour
 {
 
     public int xSize, ySize, zSize;
-
     private Mesh mesh;
     private Vector3[] vertices;
 
@@ -128,13 +127,14 @@ public class Cube : MonoBehaviour
         }
 
         t = CreatTopFace(triangles, t, ring);
+        t = CreatBottomFace(triangles, t, ring);
 
         mesh.triangles = triangles;
     }
 
 
     /// <summary>
-    /// 构建顶面或底面
+    /// 构建顶面
     /// </summary>
     /// <param name="triangles"> 已构成的三角顶点 </param>
     /// <param name="t"> 初始顶点索引 </param>
@@ -146,13 +146,16 @@ public class Cube : MonoBehaviour
         int v = ring * ySize;
         for (int x = 0; x < xSize - 1; x++, v++)
         {
+            //第一排1，2
             t = SetQuad(triangles, t, v, v + 1, v + ring - 1, v + ring);
         }
 
-        //最后一个顶点特殊处理
+        //第一排最后一个顶点特殊处理
         t = SetQuad(triangles, t, v, v + 1, v + ring - 1, v + 2);
 
+        //z方向第三个顶点
         int vMin = ring * (ySize + 1) - 1;
+        //z方向第三个顶点的右顶点
         int vMid = vMin + 1;
         int vMax = v + 2;
         for (int z = 1; z < zSize - 1; z++, vMin--, vMid++, vMax++)
@@ -167,6 +170,63 @@ public class Cube : MonoBehaviour
             //第二/三排第三个
             t = SetQuad(triangles, t, vMid, vMax, vMid + xSize - 1, vMax + 1);
         }
+
+        int vTop = vMin - 2;
+        //第四排第一个
+        t = SetQuad(triangles, t, vMin, vMid, vTop + 1, vTop);
+        for (int x = 0; x < xSize - 1; x++, vTop--, vMid++)
+        {
+            //第四排第二个
+            t = SetQuad(triangles, t, vMid, vMid + 1, vTop, vTop - 1);
+        }
+
+        //第四排最后一个
+        t = SetQuad(triangles, t, vMid, vTop - 2, vTop, vTop - 1);
+        return t;
+    }
+
+    /// <summary>
+    /// 构建底面
+    /// </summary>
+    /// <param name="triangles"> 已构成的三角顶点 </param>
+    /// <param name="t"> 初始顶点索引 </param>
+    /// <param name="ring"> 边的索引 </param>
+    /// <returns></returns>
+    int CreatBottomFace(int[] triangles, int t, int ring)
+    {
+        int v = 1;
+        int vMid = vertices.Length - (xSize - 1) * (zSize - 1);
+        t = SetQuad(triangles, t, ring - 1, vMid, 0, 1);
+        for (int x = 1; x < xSize - 1; x++, v++, vMid++)
+        {
+            t = SetQuad(triangles, t, vMid, vMid + 1, v, v + 1);
+        }
+        t = SetQuad(triangles, t, vMid, v + 2, v, v + 1);
+
+        int vMin = ring - 2;
+        vMid -= xSize - 2;
+        int vMax = v + 2;
+
+        for (int z = 1; z < zSize - 1; z++, vMin--, vMid++, vMax++)
+        {
+            t = SetQuad(triangles, t, vMin, vMid + xSize - 1, vMin + 1, vMid);
+            for (int x = 1; x < xSize - 1; x++, vMid++)
+            {
+                t = SetQuad(
+                    triangles, t,
+                    vMid + xSize - 1, vMid + xSize, vMid, vMid + 1);
+            }
+            t = SetQuad(triangles, t, vMid + xSize - 1, vMax + 1, vMid, vMax);
+        }
+
+        int vTop = vMin - 1;
+        t = SetQuad(triangles, t, vTop + 1, vTop, vTop + 2, vMid);
+        for (int x = 1; x < xSize - 1; x++, vTop--, vMid++)
+        {
+            t = SetQuad(triangles, t, vTop, vTop - 1, vMid, vMid + 1);
+        }
+        t = SetQuad(triangles, t, vTop, vTop - 1, vMid, vTop - 2);
+
         return t;
     }
 
