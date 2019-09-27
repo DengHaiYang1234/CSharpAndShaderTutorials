@@ -60,8 +60,10 @@
      <None Include="Assets\4.Flow\4.Looking Through Water\Waves.shader" />
      <None Include="Assets\1.BasicsTransform\动态或静态的图形\ColoredPoint.shader" />
      <None Include="Assets\2.Object Management\Shaders\InstancedColors.shader" />
+     <None Include="Assets\5.Mesh\2.Rounded Cube\Rounded Cube Grid.shader" />
      <None Include="Assets\4.Flow\1.Faking Liquid\DistortionFlow.shader" />
      <None Include="Assets\4.Flow\1.Faking Liquid\Flow.cginc" />
+     <None Include="Assets\5.Mesh\2.Rounded Cube\Test.shader" />
      <None Include="Assets\4.Flow\2.Directional Flow\DirectionalFlow.shader" />
      <None Include="Assets\1.BasicsTransform\计算FPS优化\Readme.txt" />
      <None Include="Assets\4.Flow\4.Looking Through Water\Readme.txt" />
