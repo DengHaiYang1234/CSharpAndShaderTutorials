@@ -1,0 +1,8 @@
+fileFormatVersion: 2
+guid: 90c8046bd0c1a4803b088853ef6f4c6a
+timeCreated: 1569576661
+licenseType: Free
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
