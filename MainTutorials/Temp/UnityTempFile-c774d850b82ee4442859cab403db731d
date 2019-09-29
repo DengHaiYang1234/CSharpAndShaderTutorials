@@ -1,0 +1,167 @@
+-debug
+-target:library
+-nowarn:0169
+-langversion:4
+-out:'Temp/Assembly-CSharp.dll'
+-unsafe
+-r:'/Applications/Unity5.6.3/Unity5.6.3.app/Contents/Managed/UnityEngine.dll'
+-r:'/Applications/Unity5.6.3/Unity5.6.3.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll'
+-r:'/Applications/Unity5.6.3/Unity5.6.3.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll'
+-r:'/Applications/Unity5.6.3/Unity5.6.3.app/Contents/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll'
+-r:'/Applications/Unity5.6.3/Unity5.6.3.app/Contents/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll'
+-r:'/Applications/Unity5.6.3/Unity5.6.3.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll'
+-r:'/Applications/Unity5.6.3/Unity5.6.3.app/Contents/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll'
+-r:'/Applications/Unity5.6.3/Unity5.6.3.app/Contents/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll'
+-r:'/Applications/Unity5.6.3/Unity5.6.3.app/Contents/Managed/UnityEditor.dll'
+-r:'/Applications/Unity5.6.3/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll'
+-r:'/Applications/Unity5.6.3/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll'
+-define:UNITY_5_3_OR_NEWER
+-define:UNITY_5_4_OR_NEWER
+-define:UNITY_5_5_OR_NEWER
+-define:UNITY_5_6_OR_NEWER
+-define:UNITY_5_6_3
+-define:UNITY_5_6
+-define:UNITY_5
+-define:ENABLE_AUDIO
+-define:ENABLE_CACHING
+-define:ENABLE_CLOTH
+-define:ENABLE_DUCK_TYPING
+-define:ENABLE_GENERICS
+-define:ENABLE_PVR_GI
+-define:ENABLE_MICROPHONE
+-define:ENABLE_MULTIPLE_DISPLAYS
+-define:ENABLE_PHYSICS
+-define:ENABLE_RUNTIME_NAVMESH_BUILDING
+-define:ENABLE_SPRITERENDERER_FLIPPING
+-define:ENABLE_SPRITES
+-define:ENABLE_TERRAIN
+-define:ENABLE_RAKNET
+-define:ENABLE_UNET
+-define:ENABLE_LZMA
+-define:ENABLE_UNITYEVENTS
+-define:ENABLE_WEBCAM
+-define:ENABLE_WWW
+-define:ENABLE_CLOUD_SERVICES_COLLAB
+-define:ENABLE_CLOUD_SERVICES_ADS
+-define:ENABLE_CLOUD_HUB
+-define:ENABLE_CLOUD_PROJECT_ID
+-define:ENABLE_CLOUD_SERVICES_UNET
+-define:ENABLE_CLOUD_SERVICES_BUILD
+-define:ENABLE_CLOUD_LICENSE
+-define:ENABLE_EDITOR_METRICS
+-define:ENABLE_EDITOR_METRICS_CACHING
+-define:ENABLE_NATIVE_ARRAY
+-define:INCLUDE_DYNAMIC_GI
+-define:INCLUDE_GI
+-define:PLATFORM_SUPPORTS_MONO
+-define:RENDER_SOFTWARE_CURSOR
+-define:INCLUDE_PUBNUB
+-define:ENABLE_PLAYMODE_TESTS_RUNNER
+-define:ENABLE_SCRIPTING_NEW_CSHARP_COMPILER
+-define:ENABLE_VIDEO
+-define:UNITY_STANDALONE_OSX
+-define:UNITY_STANDALONE
+-define:ENABLE_SUBSTANCE
+-define:ENABLE_GAMECENTER
+-define:ENABLE_RUNTIME_GI
+-define:ENABLE_MOVIES
+-define:ENABLE_NETWORK
+-define:ENABLE_CRUNCH_TEXTURE_COMPRESSION
+-define:ENABLE_UNITYWEBREQUEST
+-define:ENABLE_CLOUD_SERVICES
+-define:ENABLE_CLOUD_SERVICES_ANALYTICS
+-define:ENABLE_CLOUD_SERVICES_PURCHASING
+-define:ENABLE_CLOUD_SERVICES_CRASH_REPORTING
+-define:ENABLE_VR
+-define:ENABLE_CLUSTERINPUT
+-define:ENABLE_WEBSOCKET_HOST
+-define:ENABLE_MONO
+-define:NET_2_0_SUBSET
+-define:ENABLE_PROFILER
+-define:DEBUG
+-define:TRACE
+-define:UNITY_ASSERTIONS
+-define:UNITY_EDITOR
+-define:UNITY_EDITOR_64
+-define:UNITY_EDITOR_OSX
+-define:ENABLE_NATIVE_ARRAY_CHECKS
+-define:UNITY_TEAM_LICENSE
+'Assets/1.BasicsTransform/Matria过多优化/Fractal.cs'
+'Assets/1.BasicsTransform/Matria过多优化/RemoteFractal.cs'
+'Assets/1.BasicsTransform/动态或静态的图形/GraphFunction.cs'
+'Assets/1.BasicsTransform/动态或静态的图形/GraphFunctionName.cs'
+'Assets/1.BasicsTransform/动态或静态的图形/LocalGraph.cs'
+'Assets/1.BasicsTransform/时钟/Clock.cs'
+'Assets/1.BasicsTransform/计算FPS优化/FPSCounter.cs'
+'Assets/1.BasicsTransform/计算FPS优化/FPSDisplay.cs'
+'Assets/1.BasicsTransform/计算FPS优化/Nucleon.cs'
+'Assets/1.BasicsTransform/计算FPS优化/NucleonSpawner.cs'
+'Assets/2.Object Management/Scripts/Behavior/DyingShapeBehavior.cs'
+'Assets/2.Object Management/Scripts/Behavior/GrowingShapeBehavior.cs'
+'Assets/2.Object Management/Scripts/Behavior/LifecycleShapeBehavior.cs'
+'Assets/2.Object Management/Scripts/Behavior/MovementShapeBehavior.cs'
+'Assets/2.Object Management/Scripts/Behavior/OscillationShapeBehavior.cs'
+'Assets/2.Object Management/Scripts/Behavior/RotationShapeBehavior.cs'
+'Assets/2.Object Management/Scripts/Behavior/SatelliteShapeBehavior.cs'
+'Assets/2.Object Management/Scripts/Behavior/ShapeBehavior.cs'
+'Assets/2.Object Management/Scripts/Behavior/ShapeBehaviorPool.cs'
+'Assets/2.Object Management/Scripts/Game.cs'
+'Assets/2.Object Management/Scripts/GameLevel.Editor.cs'
+'Assets/2.Object Management/Scripts/GameLevel.cs'
+'Assets/2.Object Management/Scripts/GameLevelObject.cs'
+'Assets/2.Object Management/Scripts/Helper/ColorRangeHSV.cs'
+'Assets/2.Object Management/Scripts/Helper/FloatRange.cs'
+'Assets/2.Object Management/Scripts/Helper/FloatRangeSliderAttribute.cs'
+'Assets/2.Object Management/Scripts/Helper/IntRange.cs'
+'Assets/2.Object Management/Scripts/PersistableObject.cs'
+'Assets/2.Object Management/Scripts/PersistentStorage.cs'
+'Assets/2.Object Management/Scripts/RotatingObject.cs'
+'Assets/2.Object Management/Scripts/Shape.cs'
+'Assets/2.Object Management/Scripts/ShapeFactory.cs'
+'Assets/2.Object Management/Scripts/ShapeInstance.cs'
+'Assets/2.Object Management/Scripts/Test.cs'
+'Assets/2.Object Management/Scripts/WriteAndReader/GameDataReader.cs'
+'Assets/2.Object Management/Scripts/WriteAndReader/GameDataWriter.cs'
+'Assets/2.Object Management/Scripts/Zone/CompositeSpawnZone.cs'
+'Assets/2.Object Management/Scripts/Zone/CubeSpawnZone.cs'
+'Assets/2.Object Management/Scripts/Zone/KillZone.cs'
+'Assets/2.Object Management/Scripts/Zone/LifeZone.cs'
+'Assets/2.Object Management/Scripts/Zone/SpawnZone.cs'
+'Assets/2.Object Management/Scripts/Zone/SphereSpawnZone.cs'
+'Assets/3.Tower Defense/Helper/TowerFloatRange.cs'
+'Assets/3.Tower Defense/Helper/TowerFloatRangeSliderAttribute.cs'
+'Assets/3.Tower Defense/Scripts/Enemys/Enemy.cs'
+'Assets/3.Tower Defense/Scripts/Enemys/EnemySpawnSequence.cs'
+'Assets/3.Tower Defense/Scripts/Enemys/EnemyWave.cs'
+'Assets/3.Tower Defense/Scripts/Entitys/Tower/Explosion.cs'
+'Assets/3.Tower Defense/Scripts/Entitys/Tower/GameTileContent.cs'
+'Assets/3.Tower Defense/Scripts/Entitys/Tower/LaserTower.cs'
+'Assets/3.Tower Defense/Scripts/Entitys/Tower/MortarTower.cs'
+'Assets/3.Tower Defense/Scripts/Entitys/Tower/Shell.cs'
+'Assets/3.Tower Defense/Scripts/Entitys/Tower/Tower.cs'
+'Assets/3.Tower Defense/Scripts/Enums/EnemyType.cs'
+'Assets/3.Tower Defense/Scripts/Enums/GameTileContentType.cs'
+'Assets/3.Tower Defense/Scripts/Enums/TowerType.cs'
+'Assets/3.Tower Defense/Scripts/Factory/EnemyFactory.cs'
+'Assets/3.Tower Defense/Scripts/Factory/GameObjectFactory.cs'
+'Assets/3.Tower Defense/Scripts/Factory/GameTileContentFactory.cs'
+'Assets/3.Tower Defense/Scripts/Factory/WarEntity.cs'
+'Assets/3.Tower Defense/Scripts/Factory/WarFactory.cs'
+'Assets/3.Tower Defense/Scripts/Logic/Direction.cs'
+'Assets/3.Tower Defense/Scripts/Logic/GameBehavior.cs'
+'Assets/3.Tower Defense/Scripts/Logic/GameBoard.cs'
+'Assets/3.Tower Defense/Scripts/Logic/GameScenario.cs'
+'Assets/3.Tower Defense/Scripts/Logic/GameTile.cs'
+'Assets/3.Tower Defense/Scripts/Logic/TargetPoint.cs'
+'Assets/3.Tower Defense/Scripts/Logic/TowerGame.cs'
+'Assets/5.Mesh/1.Procedural Grid/Grid.cs'
+'Assets/5.Mesh/2.Rounded Cube/Grid.cs'
+'Assets/5.Mesh/2.Rounded Cube/RoundedCube.cs'
+'Assets/5.Mesh/3.CubeSphere/CircleGizmo.cs'
+'Assets/5.Mesh/3.CubeSphere/CubeSphere.cs'
+-r:'/Applications/Unity5.6.3/Unity5.6.3.app/Contents/Mono/lib/mono/unity/System.Runtime.Serialization.dll'
+-r:'/Applications/Unity5.6.3/Unity5.6.3.app/Contents/Mono/lib/mono/unity/System.Xml.Linq.dll'
+-r:'/Applications/Unity5.6.3/Unity5.6.3.app/Contents/Mono/lib/mono/unity/UnityScript.dll'
+-r:'/Applications/Unity5.6.3/Unity5.6.3.app/Contents/Mono/lib/mono/unity/UnityScript.Lang.dll'
+-r:'/Applications/Unity5.6.3/Unity5.6.3.app/Contents/Mono/lib/mono/unity/Boo.Lang.dll'
+-sdk:unity
