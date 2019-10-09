@@ -1,4 +1,1 @@
-sceneSetups:
-- path: Assets/5.Mesh/2.Rounded Cube/Cube Scene.unity
-  isLoaded: 1
-  isActive: 1
+sceneSetups: []
