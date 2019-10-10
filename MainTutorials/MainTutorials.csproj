@@ -154,6 +154,7 @@
     <Compile Include="Assets\5.Mesh\3.CubeSphere\CubeSphere.cs" />
     <Compile Include="Assets\5.Mesh\4.Mesh Deformation\MeshDeformer.cs" />
     <Compile Include="Assets\5.Mesh\4.Mesh Deformation\MeshDeformerInput.cs" />
+    <Compile Include="Assets\6.Render\1.矩阵\CameraTransformation.cs" />
     <Compile Include="Assets\6.Render\1.矩阵\PositionTransformation.cs" />
     <Compile Include="Assets\6.Render\1.矩阵\RotationTransformation.cs" />
     <Compile Include="Assets\6.Render\1.矩阵\ScaleTransformation.cs" />
