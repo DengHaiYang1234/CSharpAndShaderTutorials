@@ -1,4 +1,4 @@
 sceneSetups:
-- path: "Assets/6.Render/1.\u77E9\u9635/Main.unity"
+- path: Assets/7.Shader/2.BlendMode/Main.unity
   isLoaded: 1
   isActive: 1

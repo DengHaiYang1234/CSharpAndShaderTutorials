@@ -1,0 +1,17 @@
+﻿
+脚本：负责在编辑中实时更新图像，同时也负责从主摄像机抓取render texture，然后把该texture传递给Shader。
+
+Shader：一旦render texture到达Shader后，我们就在这里面进行逐像素操作。
+
+通过OnRenderImage()函数抓取render texture，再通过Graphics.Blit()函数传递给虚拟材质中的Shader进行后处理；
+
+Shader的_MainTex即为接收到的render texture，在frag函数里对图像进行逐像素处理后再返回给OnRenderImage函数，得到最后的屏幕画面。
+
+
+ExecuteInEditMode。通常，一个脚本仅会在play模式下运行。而添加了这个声明后，我们的脚本就可以进行一些回调函数，即使Unity并不是在play模式下。
+而我们常见的一些回调函数的回调方式也有所不同：
+Update：在scene发生变化时被调用
+OnGUI：在Game视图接受到Event时被调用
+OnRenderImage：在Scene视图或Game视图重绘时被调用.
+
+vertex和fragment。vertex函数负责把模型顶点位置转换到摄像机的透视坐标系中，以及处理模型各顶点对应的纹理坐标等。fragment则负责输出最后屏幕每个像素的颜色值。
