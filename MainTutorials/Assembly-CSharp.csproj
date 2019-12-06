@@ -149,6 +149,7 @@
      <None Include="Assets\4.Flow\2.Directional Flow\Flow.cginc" />
      <None Include="Assets\1.BasicsTransform\动态或静态的图形\Readme.txt" />
      <None Include="Assets\4.Flow\4.Looking Through Water\Flow.cginc" />
+     <None Include="Assets\6.Render\2.组合纹理\Textured With Detail.shader" />
      <None Include="Assets\4.Flow\4.Looking Through Water\Waves.shader" />
      <None Include="Assets\1.BasicsTransform\动态或静态的图形\ColoredPoint.shader" />
      <None Include="Assets\2.Object Management\Shaders\InstancedColors.shader" />
