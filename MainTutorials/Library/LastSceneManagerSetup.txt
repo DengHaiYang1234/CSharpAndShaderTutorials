@@ -1,1 +1,4 @@
-sceneSetups: []
+sceneSetups:
+- path: Assets/7.Shader/2.BlendMode/Main.unity
+  isLoaded: 1
+  isActive: 1
