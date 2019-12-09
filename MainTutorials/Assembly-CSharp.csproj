@@ -163,6 +163,7 @@
      <None Include="Assets\1.BasicsTransform\计算FPS优化\Readme.txt" />
      <None Include="Assets\4.Flow\4.Looking Through Water\Readme.txt" />
      <None Include="Assets\4.Flow\2.Directional Flow\Readme.txt" />
+     <None Include="Assets\6.Render\3.第一个光源\Lighting Shader.shader" />
      <None Include="Assets\4.Flow\4.Looking Through Water\LookingThroughWater.cginc" />
      <None Include="Assets\7.Shader\1.Luminosity\ImageEffect.shader" />
      <None Include="Assets\1.BasicsTransform\Matria过多优化\Readme.txt" />
