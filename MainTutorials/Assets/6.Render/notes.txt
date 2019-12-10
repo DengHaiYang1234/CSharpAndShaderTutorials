@@ -1,0 +1,1 @@
+1.点光源要使用 Tags{"LightMode" = "ForwardAdd"}才能显示。

@@ -1,0 +1,13 @@
+1.DotClamped：DotClamped 是点乘并将结果限制在01范围内，（#include UnityStandardBRDF.cginc）
+
+2.EnergyConservationBetweenDiffuseAndSpecular(能量守恒)：漫反射和高光反射的强度总和肯定是不可能比射入的光的强度还大的，那就不自然了，所以把计算漫反射需要的albedo减去高光如果高光颜色是灰调的话上面的方法没问题，但如果是彩色的，颜色显示就会异常，这种情况就应该减去rgb中的最大值。有3个参数，第一个为albedo，第二个specularColor，第三个为反射率的变量（oneMinusReflectivity）。（#include "UnityStandardUtils.cginc"）
+例如：albedo *= 1 - max(_SpecularTint.r,max(_SpecularTint.g, _SpecularTint.b));
+
+3. DiffuseAndSpecularFromMetallic：金属往往没有albedo，而非金属也没有彩色的SpecularColor。相当于计算Metallic的方法，第一个参数为albedo，第二个为参数的_Mteallic,第三个反射高光，第四个为参数变量。（#include "UnityStandardUtils.cginc"）
+
+4.UNITY_BRDF_PBS：PBS方法，参数为：albedo, specularTint,oneMinusReflectivity, _Smoothness,
+i.normal, viewDir,light, indirectLight。（#include "UnityPBSLighting.cginc" && #pragma target 3.0）
+
+5. Shade4PointLights：四个顶点光照颜色的叠加值
+
+6. ShadeSH9(float4(i.normal, 1))：计算球谐光源
