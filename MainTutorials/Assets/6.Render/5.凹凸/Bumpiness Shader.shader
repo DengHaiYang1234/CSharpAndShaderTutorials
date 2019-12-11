@@ -3,13 +3,17 @@
     Properties
     {
         _MainTex ("Albedo", 2D) = "white" {}
-        [NoScaleOffset] _HeightMap("Heights",2D) = "Gray" {}
+        [NoScaleOffset] _NormalMap("Normals",2D) = "bump" {}
+        _BumpScale("Bump Scale",Float) = 1
         _Tint("Ting",Color) = (1,1,1,1)
         _Smoothness("Smoothness",Range(0,1)) = 0.5
         [Gamma]_Metallic("Metallic",Range(0,1)) = 0
-        
+        _DetailTex("Detail Tex",2D) = "gray" {}
+        [NoScaleOffset] _DetailNormalMap("Detail Normals",2D) = "bump" {}
+        _DetailBumpScale("Detail Bump Scale",Float) = 1
+        [NoScaleOffset] _HeightMap("Custom Compute Normal Tex",2D) = "Gray" {}
     }
-
+    
     SubShader
     {
         // No culling or depth

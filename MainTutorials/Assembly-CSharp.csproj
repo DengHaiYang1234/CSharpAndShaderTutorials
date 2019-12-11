@@ -136,6 +136,7 @@
      <Compile Include="Assets\6.Render\1.矩阵\ScaleTransformation.cs" />
      <Compile Include="Assets\6.Render\1.矩阵\Transformation.cs" />
      <Compile Include="Assets\6.Render\1.矩阵\TransformationGrid.cs" />
+     <Compile Include="Assets\6.Render\5.凹凸\TangentSpaceVisualizer.cs" />
      <Compile Include="Assets\7.Shader\1.Luminosity\TestRenderImage.cs" />
      <Compile Include="Assets\7.Shader\2.BlendMode\BlendMode_ImageEffect.cs" />
      <Compile Include="Assets\7.Shader\2.BlendMode\BSC_ImageEffect.cs" />
