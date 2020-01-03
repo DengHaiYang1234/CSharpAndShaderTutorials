@@ -140,6 +140,10 @@
      <Compile Include="Assets\7.Shader\1.使用OnRenderImage来调节画面的灰度\TestRenderImage.cs" />
      <Compile Include="Assets\7.Shader\2.使用OnRenderImage来调节画面的亮度或透明度或饱和度\BlendMode_ImageEffect.cs" />
      <Compile Include="Assets\7.Shader\2.使用OnRenderImage来调节画面的亮度或透明度或饱和度\BSC_ImageEffect.cs" />
+     <Compile Include="Assets\8.SRP\1.自定义管线\Scripts\CameraRender.cs" />
+     <Compile Include="Assets\8.SRP\1.自定义管线\Scripts\CameraRender.editor.cs" />
+     <Compile Include="Assets\8.SRP\1.自定义管线\Scripts\CustomPipelineAsset.cs" />
+     <Compile Include="Assets\8.SRP\1.自定义管线\Scripts\CustomRenderPipeline.cs" />
      <None Include="Assets\6.Render\Shaders\MyLighting.cginc" />
      <None Include="Assets\6.Render\1.矩阵\Readme.txt" />
      <None Include="Assets\7.Shader\2.使用OnRenderImage来调节画面的亮度或透明度或饱和度\Readme.txt" />
