@@ -126,6 +126,8 @@
     <Compile Include="Assets\2.Object Management\Scripts\Editor\GameLevelInspector.cs" />
     <Compile Include="Assets\2.Object Management\Scripts\Editor\RegisterLevelObjectMenuItem.cs" />
     <Compile Include="Assets\3.Tower Defense\Editor\TowerFloatRangeSliderDrawer.cs" />
+    <Compile Include="Assets\8.Beziér\Editor\BezierCurveInspector.cs" />
+    <Compile Include="Assets\8.Beziér\Editor\LineInspector.cs" />
     <Compile Include="Assets\Editor\ShaderEditor.cs" />
   </ItemGroup>
   <ItemGroup>

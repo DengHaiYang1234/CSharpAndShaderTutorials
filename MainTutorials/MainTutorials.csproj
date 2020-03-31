@@ -163,6 +163,9 @@
     <Compile Include="Assets\7.Shader\1.Luminosity\TestRenderImage.cs" />
     <Compile Include="Assets\7.Shader\2.BlendMode\BSC_ImageEffect.cs" />
     <Compile Include="Assets\7.Shader\2.BlendMode\BlendMode_ImageEffect.cs" />
+    <Compile Include="Assets\8.Beziér\Bezier.cs" />
+    <Compile Include="Assets\8.Beziér\BezierCurve.cs" />
+    <Compile Include="Assets\8.Beziér\Line.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\1.BasicsTransform\Matria过多优化\Readme.txt" />
