@@ -1,4 +1,6 @@
-﻿
+﻿// Upgrade NOTE: upgraded instancing buffer 'Props' to new syntax.
+
+
 
 Shader "Custom/InstancedColors" {
 	Properties {
@@ -31,13 +33,14 @@ Shader "Custom/InstancedColors" {
 
 		//https://mp.weixin.qq.com/s?__biz=MzU5MjQ1NTEwOA==&mid=2247490870&amp;idx=1&amp;sn=74037eca135ce82565aaeef32a80f74c&source=41#wechat_redirect
 		//https://catlikecoding.com/unity/tutorials/object-management/object-variety/
-		UNITY_INSTANCING_CBUFFER_START(Props)
+		UNITY_INSTANCING_BUFFER_START(Props)
 		UNITY_DEFINE_INSTANCED_PROP(fixed4, _Color)
-		UNITY_INSTANCING_CBUFFER_END
+#define _Color_arr Props
+		UNITY_INSTANCING_BUFFER_END(Props)
 
 		void surf (Input IN, inout SurfaceOutputStandard o) {
 			// Albedo comes from a texture tinted by color
-			fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * UNITY_ACCESS_INSTANCED_PROP(_Color);
+			fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * UNITY_ACCESS_INSTANCED_PROP(_Color_arr, _Color);
 			o.Albedo = c.rgb;
 			// Metallic and smoothness come from slider variables
 			o.Metallic = _Metallic;

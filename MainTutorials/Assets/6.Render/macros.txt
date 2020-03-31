@@ -1,0 +1,4 @@
+1. UNITY_LIGHT_ATTENUATION：计算正确的衰减因子。有3个参数，第一个参数为衰减的变量名，第二个参数与阴影有关（不支持阴影可为0），第三个参数时世界位置。（#include "AutoLight.cginc"）。
+2.#pragma multi_compile_fwdadd:相当于是把所有的基础光照+Cookie都添加进去。
+3.#pragma multi_compile _ VERTEXLIGHT_ON：使用顶点光照
+4.#pragma multi_compile_fwdadd_fullshadows：可以让addpass的光源也产生阴影，默认是不产生的。

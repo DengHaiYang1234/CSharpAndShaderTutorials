@@ -1,0 +1,6 @@
+https://blog.csdn.net/qq_38275140/article/details/85297474
+1.Albedo：一种物质的漫反射的颜色，也就是说材质的纹理和颜色。光照射过来一部分被吸收，剩余被反射，部分漫反射、部分高光反射
+2.Metallic:金属往往没有albedo，而非金属也没有彩色的SpecularColor
+3.Smoothness:高光的范围
+
+
