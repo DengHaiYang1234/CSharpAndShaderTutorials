@@ -166,6 +166,7 @@
     <Compile Include="Assets\7.Shader\2.使用OnRenderImage来调节画面的亮度或透明度或饱和度\BlendMode_ImageEffect.cs" />
     <Compile Include="Assets\8.Beziér\Bezier.cs" />
     <Compile Include="Assets\8.Beziér\BezierCurve.cs" />
+    <Compile Include="Assets\8.Beziér\BezierSpline.cs" />
     <Compile Include="Assets\8.Beziér\Line.cs" />
   </ItemGroup>
   <ItemGroup>
