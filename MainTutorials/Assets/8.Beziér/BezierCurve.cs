@@ -17,12 +17,13 @@ public class BezierCurve : MonoBehaviour
         };
     }
 
+    //坐标转换
     public Vector3 GetPoint(float t)
     {
         return transform.TransformPoint(Bezier.GetPoint(points[0], points[1], points[2], points[3], t));
     }
 
-
+    //速度
     public Vector3 GetVelocity(float t)
     {
         return transform.TransformPoint(Bezier.GetFirstDerivative(points[0], points[1], points[2], points[3], t)) -
