@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+//https://www.cnblogs.com/sggggr/p/11853243.html 线性差值公式
 public class BezierSpline : MonoBehaviour
 {
     [HideInInspector]
@@ -29,24 +30,24 @@ public class BezierSpline : MonoBehaviour
 
     public void SetControlPoint(int index, Vector3 point)
     {
-        if (index % 3 == 0)//起点
+        if (index % 3 == 0)
         {
             Vector3 delta = point - points[index];
             if (loop)
             {
-                if (index == 0)
+                if (index == 0)//初始起点
                 {
                     points[1] += delta;
                     points[points.Length - 2] += delta;
                     points[points.Length - 1] = point;
                 }
-                else if (index == points.Length - 1)
+                else if (index == points.Length - 1)//终点
                 {
                     points[0] = point;
                     points[1] += delta;
                     points[index - 1] += delta;
                 }
-                else
+                else//中间位置点
                 {
                     points[index - 1] += delta;
                     points[index + 1] += delta;
@@ -103,25 +104,23 @@ public class BezierSpline : MonoBehaviour
     }
 
     /// <summary>
-    /// 在固定起点和终点的同时（剔除），选出一点左右位置都满足的情况。例如：0,1,2,3,4,5,6,7.满足条件的是2,3,4
-    /// 选取中间点，调整相反点
+    /// 控制点。例如0,1,2,3,4,5,6的控制点为0,0,1,1,1,2,2。
     /// </summary>
     /// <param name="index"></param>
     void EnforceMode(int index)
     {
         int modeIndex = (index + 1) / 3;
         BezierControlPointMode mode = modes[modeIndex];
-        //第一段和最后一段三阶曲线不做处理
+        //起点和终点不做处理
         if (mode == BezierControlPointMode.Free || modeIndex == 0 || modeIndex == modes.Length - 1)
             return;
 
-        //各三阶曲线起点
+        //各阶曲线控制点的中间索引
         int middleIndex = modeIndex * 3;
-        //fixedIndex：
         int fixedIndex, enforcedIndex;
-        if (index <= middleIndex)//位于第一阶段三阶曲线内的点，例如2,3
+        if (index <= middleIndex)//获取前一点
         {
-            fixedIndex = middleIndex - 1; //取前一点
+            fixedIndex = middleIndex - 1; 
             if (fixedIndex < 0)
             {
                 fixedIndex = points.Length - 2;
@@ -132,7 +131,7 @@ public class BezierSpline : MonoBehaviour
                 enforcedIndex = 1;
             }
         }
-        else
+        else//获取后一点
         {
             fixedIndex = middleIndex + 1;
             if (fixedIndex >= points.Length)
@@ -142,13 +141,18 @@ public class BezierSpline : MonoBehaviour
                 enforcedIndex = points.Length - 1;
         }
 
+        //中间控制点
         Vector3 middle = points[middleIndex];
+        //前一点与中间控制点的向量差
         Vector3 enforceedTangent = middle - points[fixedIndex];
+        //使之在同一方向且距离相等
         if (mode == BezierControlPointMode.Aligned)
             enforceedTangent = enforceedTangent.normalized * Vector3.Distance(middle, points[enforcedIndex]);
+
         points[enforcedIndex] = middle + enforceedTangent;
     }
 
+    //Loop首尾相连
     public bool Loop
     {
         get { return loop; }
