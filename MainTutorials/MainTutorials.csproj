@@ -179,6 +179,7 @@
     <Compile Include="Assets\9.Maze\Scripts\MazeCellEdge.cs" />
     <Compile Include="Assets\9.Maze\Scripts\MazeDirection.cs" />
     <Compile Include="Assets\9.Maze\Scripts\MazeDirections.cs" />
+    <Compile Include="Assets\9.Maze\Scripts\MazeDoor.cs" />
     <Compile Include="Assets\9.Maze\Scripts\MazePassage.cs" />
     <Compile Include="Assets\9.Maze\Scripts\MazeWall.cs" />
   </ItemGroup>
@@ -226,6 +227,7 @@
     <None Include="Assets\7.Shader\2.使用OnRenderImage来调节画面的亮度或透明度或饱和度\Readme.txt" />
     <None Include="Assets\7.Shader\3.压扁效果\Squash.shader" />
     <None Include="Assets\7.Shader\3.压扁效果\TestSquash.shader" />
+    <None Include="Assets\百宝箱.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

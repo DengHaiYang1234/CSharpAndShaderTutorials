@@ -7,3 +7,4 @@ public enum MazeDirection
     South,
     West
 }
+

@@ -13,7 +13,12 @@ public class Maze : MonoBehaviour
 
     public MazePassage passagePrefab;
 
-    public MazeWall wallPrefab;
+    public MazeWall[] wallPrefabs;
+
+    public MazeDoor doorPrefab;
+
+    [Range(0f,1f)]
+    public float doorProbability;
 
     public float generationStepDelay;
 
@@ -65,23 +70,26 @@ public class Maze : MonoBehaviour
         return newCell;
     }
 
-    //记录通道的东西南北
+    //记录通道（两个cell之间相对位置）
     void CreatePassage(MazeCell cell, MazeCell otherCell, MazeDirection direction)
     {
-        MazePassage passage = Instantiate(passagePrefab) as MazePassage;
+        MazePassage prefab = Random.value < doorProbability ? doorPrefab : passagePrefab;
+        MazePassage passage = Instantiate(prefab) as MazePassage;
         passage.Initialize(cell, otherCell, direction);
-        passage = Instantiate(passagePrefab) as MazePassage;
+        passage = Instantiate(prefab) as MazePassage;
         passage.Initialize(otherCell, cell, direction.GetOpposite());
     }
 
-    //记录墙的东西南北
+    //记录墙（两个cell之间相对位置）
     void CreateWall(MazeCell cell, MazeCell otherCell, MazeDirection direction)
     {
-        MazeWall wall = Instantiate(wallPrefab) as MazeWall;
+        int rangeIndex = Random.Range(0, wallPrefabs.Length);
+
+        MazeWall wall = Instantiate(wallPrefabs[rangeIndex]) as MazeWall;
         wall.Initialize(cell, otherCell, direction);
         if (otherCell != null)
         {
-            wall = Instantiate(wallPrefab) as MazeWall;
+            wall = Instantiate(wallPrefabs[rangeIndex]) as MazeWall;
             wall.Initialize(otherCell, cell, direction.GetOpposite());
         }
     }
@@ -97,14 +105,22 @@ public class Maze : MonoBehaviour
     {
         int currentIndex = activeCells.Count - 1;
         MazeCell currentCell = activeCells[currentIndex];
-        MazeDirection direction = MazeDirections.RandomValue;
-        //取一个随机方向+1
+
+        //四个方向全部初始化
+        if (currentCell.IsFullyInitialized)
+        {
+            activeCells.RemoveAt(currentIndex);
+            return;
+        }
+
+        MazeDirection direction = currentCell.RandomUninitializedDirection;
+        //基于上个cell，然后随机初始化的方向，来确定下一个cell位置（neighbor）
         IntVector2 coordinates = currentCell.coordinates + direction.ToIntVector2();
         if (ContainsCoordinates(coordinates))
         {
             MazeCell neighbor = GetCell(coordinates);
 
-            //若隔壁的点没有取到
+            //若隔壁地板还不存在，那么默认设置为通道，可移动
             if (neighbor == null)
             {
                 //创建新格子，并标记当前格子和新格子的位置信息
@@ -112,21 +128,15 @@ public class Maze : MonoBehaviour
                 CreatePassage(currentCell, neighbor, direction);
                 activeCells.Add(neighbor);
             }
-            else//若隔壁已经有格子了就生成墙
+            else//若隔壁已经有格子了就生成墙，不能移动
             {
                 CreateWall(currentCell, neighbor, direction);
-                //剔除当前，继续找一格子
-                activeCells.RemoveAt(currentIndex);
             }
         }
         else
         {
-            //超出边界就修墙。
+            //边界位置就修墙。
             CreateWall(currentCell, null, direction);
-            activeCells.RemoveAt(currentIndex);
         }
-
     }
-
-
 }

@@ -18,6 +18,8 @@ public abstract class MazeCellEdge : MonoBehaviour
         //放置于原来的cell
         transform.parent = cell.transform;
         transform.localPosition = Vector3.zero;
+        //旋转角度
+        transform.localRotation = direction.ToRotation();
     }
 
 

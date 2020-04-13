@@ -21,6 +21,14 @@ public static class MazeDirections
         new IntVector2(-1, 0)
     };
 
+    private static Quaternion[] rotations =
+    {
+        Quaternion.identity,
+        Quaternion.Euler(0f, 90f, 0f),
+        Quaternion.Euler(0f, 180f, 0f),
+        Quaternion.Euler(0f, 270f, 0f)
+    };
+
     private static MazeDirection[] opposites =
     {
         MazeDirection.South,
@@ -28,6 +36,11 @@ public static class MazeDirections
         MazeDirection.North,
         MazeDirection.East,
     };
+
+    public static Quaternion ToRotation(this MazeDirection direction)
+    {
+        return rotations[(int)direction];
+    }
 
     //给定方向
     public static IntVector2 ToIntVector2(this MazeDirection direction)
