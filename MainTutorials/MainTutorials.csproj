@@ -181,6 +181,8 @@
     <Compile Include="Assets\9.Maze\Scripts\MazeDirections.cs" />
     <Compile Include="Assets\9.Maze\Scripts\MazeDoor.cs" />
     <Compile Include="Assets\9.Maze\Scripts\MazePassage.cs" />
+    <Compile Include="Assets\9.Maze\Scripts\MazeRoom.cs" />
+    <Compile Include="Assets\9.Maze\Scripts\MazeRoomSettings.cs" />
     <Compile Include="Assets\9.Maze\Scripts\MazeWall.cs" />
   </ItemGroup>
   <ItemGroup>

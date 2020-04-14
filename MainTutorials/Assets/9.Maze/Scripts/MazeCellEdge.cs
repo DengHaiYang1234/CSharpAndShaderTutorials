@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//边与对边的信息
 public abstract class MazeCellEdge : MonoBehaviour
 {
+    //当前cell与对面cell
     public MazeCell cell, otherCell;
-
+    //朝向
     public MazeDirection direction;
 
 
-    public void Initialize(MazeCell cell, MazeCell otherCell, MazeDirection direction)
+    public virtual void Initialize(MazeCell cell, MazeCell otherCell, MazeDirection direction)
     {
         this.cell = cell;
         this.otherCell = otherCell;

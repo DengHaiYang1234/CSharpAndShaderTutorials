@@ -7,9 +7,19 @@ public class MazeCell : MonoBehaviour
 {
     public IntVector2 coordinates;
 
+    //记录当前cell的room
+    public MazeRoom room;
+
     private MazeCellEdge[] edges = new MazeCellEdge[MazeDirections.Count];
 
     private int initializedEdgeCount = 0;
+
+    public void Initialize(MazeRoom room)
+    {
+        room.Add(this);
+        //设置地板材质
+        transform.GetChild(0).GetComponent<Renderer>().material = room.settings.floorMaterial;
+    }
 
     //四个面是否已经完全填满
     public bool IsFullyInitialized
