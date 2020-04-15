@@ -26,5 +26,15 @@ public abstract class MazeCellEdge : MonoBehaviour
     }
 
 
+    public virtual void OnPlayerEntered()
+    {
+    }
+
+    public virtual void OnPlayerExited()
+    {
+        
+    }
+
+
 
 }

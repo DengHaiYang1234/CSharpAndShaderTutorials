@@ -184,6 +184,7 @@
     <Compile Include="Assets\9.Maze\Scripts\MazeRoom.cs" />
     <Compile Include="Assets\9.Maze\Scripts\MazeRoomSettings.cs" />
     <Compile Include="Assets\9.Maze\Scripts\MazeWall.cs" />
+    <Compile Include="Assets\9.Maze\Scripts\Player.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\1.BasicsTransform\Matria过多优化\Readme.txt" />

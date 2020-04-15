@@ -54,6 +54,17 @@ public static class MazeDirections
         return opposites[(int)direction];
     }
 
+    //顺时针方向
+    public static MazeDirection GetNextClockwise(this MazeDirection direction)
+    {
+        return (MazeDirection)(((int)direction + 1) % Count);
+    }
+    //逆时针方向
+    public static MazeDirection GetNextCounterclockwise(this MazeDirection direction)
+    {
+        return (MazeDirection)(((int)direction + Count - 1) % Count);
+    }
+
 }
 
 
